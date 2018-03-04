@@ -1,0 +1,12 @@
+﻿  functions.cpp
+c:\users\valentine oradiegwu\documents\visual studio 2015\projects\random\random\functions.cpp(12): warning C4018: '<': signed/unsigned mismatch
+c:\users\valentine oradiegwu\documents\visual studio 2015\projects\random\random\functions.cpp(14): warning C4018: '<': signed/unsigned mismatch
+c:\users\valentine oradiegwu\documents\visual studio 2015\projects\random\random\functions.cpp(31): warning C4018: '<': signed/unsigned mismatch
+c:\users\valentine oradiegwu\documents\visual studio 2015\projects\random\random\functions.cpp(125): warning C4018: '<': signed/unsigned mismatch
+c:\users\valentine oradiegwu\documents\visual studio 2015\projects\random\random\functions.cpp(161): warning C4018: '<': signed/unsigned mismatch
+c:\users\valentine oradiegwu\documents\visual studio 2015\projects\random\random\functions.cpp(163): warning C4018: '<': signed/unsigned mismatch
+c:\users\valentine oradiegwu\documents\visual studio 2015\projects\random\random\functions.cpp(401): warning C4018: '<': signed/unsigned mismatch
+  Main.cpp
+  Generating Code...
+  Random.vcxproj -> C:\Users\Valentine Oradiegwu\documents\visual studio 2015\Projects\Random\Debug\Random.exe
+  Random.vcxproj -> C:\Users\Valentine Oradiegwu\documents\visual studio 2015\Projects\Random\Debug\Random.pdb (Partial PDB)
