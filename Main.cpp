@@ -155,9 +155,7 @@ int main()
 	const std::shared_ptr<int> int_ptr = std::make_shared<int>(5);
 	const std::shared_ptr<int> int_ptr2 = std::make_shared<int>(5);
 	*int_ptr = 7;
-	//int_ptr = int_ptr2;
 	const std::shared_ptr<const int> int_constptr = std::make_shared<int>(5);
-	//*int_constptr = 8;
 	std::cout << "myAtoi =  " << myAtoi("2147483648") << std::endl;
 	std::cout << "atoi =  " << atoi("2147483648") << std::endl;
 	system("PAUSE");
