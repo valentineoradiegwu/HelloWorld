@@ -6,6 +6,9 @@
 #include <deque>
 #include <stdexcept>
 #include <typeinfo>
+#include <iterator>
+#include <thread>
+#include <future>
 
 template <typename T, typename CONT = std::deque<T> >
 class MyStack
@@ -196,6 +199,42 @@ std::string Val<T*>::getType() const
 {
 	const std::type_info& ti = typeid(m_member);
 	return ti.name();
+}
+
+template <typename Iter>
+typename std::iterator_traits<Iter>::value_type doAccumulate(Iter start, Iter end)
+{
+	return std::accumulate(start, end, 0);
+}
+
+template <typename CONT>
+typename CONT::value_type ParrallelAccumulatorImpl(const CONT& randomAccessSequence, size_t numThreads, std::random_access_iterator_tag)
+{
+	using value_type = typename CONT::value_type;
+	using const_iterator = typename CONT::const_iterator;
+	using TaskType = value_type(const_iterator, const_iterator);
+
+	std::packaged_task<TaskType> task1 {doAccumulate<const_iterator>};
+	std::packaged_task<TaskType> task2 {doAccumulate<const_iterator>};
+
+	std::future<value_type> f1{task1.get_future()};
+	std::future<value_type> f2{task2.get_future()};
+
+	std::thread t1{std::move(task1), randomAccessSequence.begin(), randomAccessSequence.begin() + randomAccessSequence.size() / 2};
+	std::thread t2{std::move(task2), randomAccessSequence.begin() + randomAccessSequence.size() / 2, randomAccessSequence.begin() + randomAccessSequence.size()};
+
+	t1.join();
+	t2.join();
+
+	return f1.get() + f2.get();
+}
+
+template <typename CONT, size_t NUM_OF_THREADS = 2>
+typename CONT::value_type ParrallelAccumulator(const CONT& randomAccessSequence)
+{
+    return ParrallelAccumulatorImpl(randomAccessSequence, 
+	                                NUM_OF_THREADS, 
+	                                std::iterator_traits<typename CONT::const_iterator>::iterator_category{});
 }
 
 #endif

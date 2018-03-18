@@ -158,6 +158,8 @@ int main()
 	const std::shared_ptr<const int> int_constptr = std::make_shared<int>(5);
 	std::cout << "myAtoi =  " << myAtoi("2147483648") << std::endl;
 	std::cout << "atoi =  " << atoi("2147483648") << std::endl;
+
+	auto sum = ParrallelAccumulator(data);
 	system("PAUSE");
 	return 0;
 }
