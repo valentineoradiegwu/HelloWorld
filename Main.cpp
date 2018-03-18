@@ -160,6 +160,7 @@ int main()
 	std::cout << "atoi =  " << atoi("2147483648") << std::endl;
 
 	auto sum = ParrallelAccumulator(data);
+	std::cout << "Multi threaded sum = " << sum << std::endl;
 	system("PAUSE");
 	return 0;
 }
