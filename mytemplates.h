@@ -201,6 +201,13 @@ std::string Val<T*>::getType() const
 	return ti.name();
 }
 
+// Having a go at the templated typedefs from C++ 11
+template <typename CONT>
+using iterator_category = typename std::iterator_traits<typename CONT::const_iterator>::iterator_category;
+
+template <typename CONT>
+using value_type = typename CONT::value_type;
+
 template <typename Iter>
 typename std::iterator_traits<Iter>::value_type doAccumulate(Iter start, Iter end)
 {
@@ -208,9 +215,9 @@ typename std::iterator_traits<Iter>::value_type doAccumulate(Iter start, Iter en
 }
 
 template <typename CONT>
-typename CONT::value_type ParrallelAccumulatorImpl(const CONT& randomAccessSequence, size_t numThreads, std::random_access_iterator_tag)
+typename value_type<CONT> ParrallelAccumulatorImpl(const CONT& randomAccessSequence, size_t numThreads, std::random_access_iterator_tag)
 {
-	using value_type = typename CONT::value_type;
+	using value_type = value_type<CONT>;
 	using const_iterator = typename CONT::const_iterator;
 	using TaskType = value_type(const_iterator, const_iterator);
 
@@ -234,7 +241,7 @@ typename CONT::value_type ParrallelAccumulator(const CONT& randomAccessSequence)
 {
     return ParrallelAccumulatorImpl(randomAccessSequence, 
 	                                NUM_OF_THREADS, 
-	                                std::iterator_traits<typename CONT::const_iterator>::iterator_category{});
+	                                iterator_category<CONT>{});
 }
 
 #endif
