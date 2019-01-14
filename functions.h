@@ -146,6 +146,7 @@ void BubbleSort(Iter begin, Iter end)
 	{
 		auto current = begin;
 		auto next = current + 1;
+		auto is_original_sorted = true;
 		while (next != end)
 		{
 			if (*current > *next)
@@ -153,10 +154,12 @@ void BubbleSort(Iter begin, Iter end)
 				auto temp = *current;
 				*current = *next;
 				*next = temp;
+				is_original_sorted = false;
 			}
 			++current;
 			++next;
 		}
+		if (is_original_sorted) break;
 		--end;
 	}
 }
