@@ -4,7 +4,11 @@
 #include <limits.h>
 #include <algorithm>
 #include <typeinfo>
-#include <string.h> 
+#include <string.h>
+#include <boost/tokenizer.hpp>
+#include <boost/foreach.hpp>
+#include <sstream>
+#include <memory>
 
 std::vector<int> LeetTwoSum(const std::vector<int>& numbers, int target)
 {
@@ -15,7 +19,8 @@ std::vector<int> LeetTwoSum(const std::vector<int>& numbers, int target)
 		{
 			if ((numbers[i] + numbers[j]) == target)
 			{
-				res = { i, j };
+				//why not return at this point?
+				return res = { i, j };
 			}
 		}
 	}
@@ -34,7 +39,7 @@ std::vector<int> LeetTwoSum2(const std::vector<int>& numbers, int target)
 		item = entries.find(diff);
 		if (item != entries.end())
 		{
-			return res = { i, item->second};
+			return res = { item->second, i};
 		}
 		entries.insert({ numbers[i], i});
 	}
@@ -59,6 +64,7 @@ std::vector<int> LeetTwoSumSorted(const std::vector<int>& numbers, int target)
 	return res;
 }
 
+//The solution makes allowance for overflow in the 2 operations
 int LeetReverseInt(int input)
 {
 	int res = 0;
@@ -75,7 +81,7 @@ int LeetReverseInt(int input)
 		if ((c - a) != b)
 			return 0;
 		res = a + b;
-		input = input / 10;
+		input /=  10;
 	}
 	return res;
 }
@@ -111,40 +117,33 @@ bool LeetIsPalindrome(int x)
 	return x == reversed;
 }
 
-//calculus
 int LeetLongestSubstring(const std::string& s)
 {
-	int longest = 0;
-	int current = 0;
 	int i = 0;
-	bool allUnique = true;
-	std::map<char, int> seen;
-	std::map<char, int>::iterator found;
-
-	resume:
-	for (; i < s.size(); ++i)
+	int j = 0;
+	int max = 0;
+	std::set<char> unique{};
+	/*
+	1. Keep i and walk with j until u find a char u have seen before. Add to set
+	2. If u find a repeating char, increment i, remove i from set.
+	*/
+	while (j < s.size())
 	{
-		found = seen.find(s[i]);
-		if (found == seen.end())
+		auto iter = unique.find(s[j]);
+		if (iter == unique.end())
 		{
-			++current;
-			seen.insert({ s[i], i });
+			unique.insert(s[j]);
+			++j;
+			max = std::max(max, j - i);
 		}
 		else
 		{
-			allUnique = false;
-			i = found->second + 1;
-			seen.clear();
-			if (current > longest)
-			{
-				longest = current;
-			}
-			current = 0;
-			goto resume;
+			//Need to move i until we get to just beyond the repeating char.
+			unique.erase(s[i]);
+			++i;
 		}
 	}
-
-	return allUnique? s.size(): (current > longest) ? current: longest;
+	return max;
 }
 
 //{ -1, 0, 1, 2, -1, -4 }
@@ -158,9 +157,9 @@ std::vector<std::vector<int> > LeetThreeSum(std::vector<int>& nums)
 	std::sort(nums.begin(), nums.end());
 	int sum = 0;
 
-	for (int i = 0; i < nums.size(); ++i)
+	for (size_t i = 0; i < nums.size(); ++i)
 	{
-		for (int j = i + 2; j < nums.size(); ++j)
+		for (size_t j = i + 2; j < nums.size(); ++j)
 		{
 			sum = nums[i] + nums[i + 1] + nums[j];
 			if ( sum == 0)
@@ -208,9 +207,7 @@ bool unique_chars(const char* input)
 	for (const char* i = input; *i != '\0'; ++i)
 	{
 		if (chars[*i])
-		{
 			return false;
-		}
 		chars[*i] = true;
 	}
 	return true;
@@ -288,7 +285,12 @@ void remove_dupes3(char* input)
 	}
 	*tail = '\0';
 }
-
+/*
+ANagrams
+1. Sort the 2 strings and compare the strings fr equality. If equal, then they are anagrams.
+2. Build a map of chars to occurences in first string. Then decrease the occurences in second string and the map should have all zeros if an anagram.
+3. SImilar to (2) but rather than comparing the map of chars to occurences to be all 0's, we can also track a count of chars and that should be 0 at end of second string.
+*/
 bool are_anagrams(const char* input1, const char* input2)
 {
 	if (strlen(input1) != strlen(input2))
@@ -305,19 +307,91 @@ bool are_anagrams(const char* input1, const char* input2)
 
 	for (const char* i = input2; *i; ++i)
 	{
-		if (!letters[*i])
+		if (letters[*i] == 0)
 			return false;
 
 		--letters[*i];
 
-		if (!letters[*i])
+		if (letters[*i] == 0)
 			--unique_chars;
-		if (!unique_chars)
-		{
-			return !*(++i);
-		}
+		if (unique_chars == 0)
+			return *(++i) == '\0';
 	}
 	return false;
+}
+
+std::string replaceSpaceWithEncoding(char* input)
+{
+	int spaceCount = 0;
+	for (char* i = input; *i; ++i)
+	{
+		if (*i == ' ')
+			++spaceCount;
+	}
+	const int length = strlen(input);
+	const int newLength = length + (spaceCount * 2);
+	char* newString = new char [newLength];
+	//auto newString = std::make_unique<char[]>(newLength);
+	newString[newLength] = '\0';
+
+	char* lastElement = input + (length - 1);
+	char* lastElementNew = newString + (newLength - 1);
+	for (char* i = lastElement; i >= input; --i)
+	{
+		if (*i == ' ')
+		{
+			*lastElementNew = '0';
+			--lastElementNew;
+			*lastElementNew = '2';
+			--lastElementNew;
+			*lastElementNew = '%';
+			--lastElementNew;
+		}
+		else
+		{
+			*lastElementNew = *i;
+			--lastElementNew;
+		}
+	}
+	auto res = std::string(newString);
+	//delete[] newString;
+	return res;
+
+}
+
+/*
+1. Traverse the 2 dim array recording every row or column that has a 0.
+2. Traverse the 2 dim array again and if a cell falls in a row or column with a zero, set it to 0.
+*/
+void setZeros(int matrix[4][4])
+{
+	//constexpr int rows = sizeof matrix / sizeof matrix[0];
+	//constexpr int cols = std::extent<decltype(matrix), 1>::value;
+	int rows_with_zeros[4] = { 1 };
+	int columns_with_zeros[4] = { 1 };
+
+	for (int i = 0; i < 4; ++i)
+	{
+		for (int j = 0; j < 4; ++j)
+		{
+			if (matrix[i][j] == 0)
+			{
+				rows_with_zeros[i] = 0;
+				columns_with_zeros[j] = 0;
+			}
+		}
+	}
+
+	for (int i = 0; i < 4; ++i)
+	{
+		for (int j = 0; j < 4; ++j)
+		{
+			if (rows_with_zeros[i] == 0 || columns_with_zeros[j] == 0)
+			{	
+				matrix[i][j] = 0;
+			}
+		}
+	}
 }
 
 int myStrCmp(const char* input1, const char* input2)
@@ -340,6 +414,7 @@ int myStrCmp(const char* input1, const char* input2)
 	return 0;
 }
 
+// If the string is boomboomboomd, will your algorithm return true for a substring boomboomd?
 bool is_substr(const char* input1, const char* input2)
 {
 	//obviously u should check if the length ofsubstring satisfies a few considerations
@@ -398,7 +473,7 @@ std::vector<std::vector<int> > LeetThreeSum2(std::vector<int>& nums)
 	int start = 0;
 	int end = nums.size() - 1;
 
-	for (int i = 0; i < nums.size() - 2; ++i)
+	for (size_t i = 0; i < nums.size() - 2; ++i)
 	{
 		if (i > 0 && nums[i] == nums[i - 1])
 			continue;
@@ -464,6 +539,37 @@ int myAtoi(std::string str)
 		res = (res * 10) + (character - '0');
 	}
 	return sign * res;
+}
+
+std::vector<std::string> stringToVector(const std::string& input)
+{
+	std::vector<std::string> strings;
+	std::istringstream f{input};
+	std::string each_token;
+	while (getline(f, each_token, ' ')) {
+		std::cout << each_token << std::endl;
+		strings.push_back(each_token);
+	}
+	return strings;
+}
+
+bool IsSentenceInString(const std::string& ransom, const std::string& dictionary)
+{
+	auto ransom_words = stringToVector(ransom);
+	auto dictionary_words = stringToVector(dictionary);
+	std::map<const std::string, int> freq;
+	for (auto& word : dictionary_words)
+	{
+		++freq[word];
+	}
+	for (auto& word : ransom_words)
+	{
+		if (freq.find(word) == freq.end() || freq[word] == 0)
+			return false;
+		else
+			--freq[word];
+	}
+	return true;
 }
 
 template <typename T>

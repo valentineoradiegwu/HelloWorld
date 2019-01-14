@@ -114,18 +114,27 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="complex.cpp" />
     <ClCompile Include="functions.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="produce1consume1.cpp" />
     <ClCompile Include="producerconsumer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CircularList.h" />
+    <ClInclude Include="complex.h" />
     <ClInclude Include="functions.h" />
+    <ClInclude Include="LRUCache.h" />
     <ClInclude Include="mylist.h" />
+    <ClInclude Include="myshared.h" />
+    <ClInclude Include="mystack.h" />
     <ClInclude Include="mytemplates.h" />
     <ClInclude Include="MyTree.h" />
+    <ClInclude Include="printtuple.h" />
     <ClInclude Include="produce1consume1.h" />
     <ClInclude Include="producerconsumer.h" />
+    <ClInclude Include="SetOfStacks.h" />
+    <ClInclude Include="Singleton.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

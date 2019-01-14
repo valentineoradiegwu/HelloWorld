@@ -1,5 +1,7 @@
 #pragma once
 #include <memory>
+#include <vector>
+#include <list>
 
 template <typename T>
 struct Node
@@ -31,13 +33,18 @@ public:
 	Node<T>* find(const T& item);
 	const Node<T>* find(const T& item) const;
 	void printInOrder();
+	T findMin() const;
+	T findMax() const;
 	~MyTree();
+	void GetNodesPerLevel() const;
 private:
 	Node<T>* m_root;
 	void doInsert(Node<T>*& current, const T& item);
 	Node<T>* doFind(Node<T>* current, const T& item);
 	void doPrintInOrder(Node<T>* current);
 	void removeSubTree(Node<T>* current);
+	T doFindMin(Node<T>* current) const;
+	T doFindMax(Node<T>* current) const;
 };
 
 template <typename T>
@@ -145,7 +152,7 @@ void MyTree<T>::doPrintInOrder(Node<T>* current)
 template <typename T>
 void MyTree<T>::removeSubTree(Node<T>* current)
 {
-	if (current)
+	if (m_root)
 	{
 		if (current->m_left)
 		{
@@ -156,5 +163,71 @@ void MyTree<T>::removeSubTree(Node<T>* current)
 			removeSubTree(current->m_right);
 		}
 		delete current;
+	}
+}
+
+template <typename T>
+T MyTree<T>::doFindMin(Node<T>* current) const
+{
+	if (current->m_left)
+		return doFindMin(current->m_left);
+
+	return current->m_data;
+}
+template <typename T>
+T MyTree<T>::doFindMax(Node<T>* current) const
+{
+	if (current->m_right)
+		return doFindMax(current->m_right);
+
+	return current->m_data;
+}
+
+template <typename T>
+T MyTree<T>::findMin() const
+{
+	return doFindMin(m_root);
+}
+
+template <typename T>
+T MyTree<T>::findMax() const
+{
+	return doFindMax(m_root);
+}
+
+template <typename T>
+void MyTree<T>::GetNodesPerLevel() const
+{
+	if (m_root)
+	{
+		std::list<Node<T>*> eachLevel{};
+		eachLevel.push_back(m_root);
+		std::cout << "This level has " << m_root->m_data << std::endl;
+		std::vector<std::list<Node<T>*>> levels{};
+		levels.push_back(eachLevel);
+		while (true)
+		{
+			auto& prevLevel = levels.back();
+			eachLevel.clear();
+			std::cout << "This level has ";
+			for (auto node : prevLevel)
+			{
+				if (node->m_left)
+				{
+					std::cout << node->m_left->m_data << " ";
+					eachLevel.push_back(node->m_left);
+				}
+				if (node->m_right)
+				{
+					std::cout << node->m_right->m_data << " ";
+					eachLevel.push_back(node->m_right);
+				}
+			}
+			std::cout << std::endl;
+			if (eachLevel.empty())
+				break;
+			else
+				levels.push_back(eachLevel);
+		}
 	}
 }

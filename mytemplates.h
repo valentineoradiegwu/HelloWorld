@@ -10,6 +10,7 @@
 #include <thread>
 #include <future>
 
+/*
 template <typename T, typename CONT = std::deque<T> >
 class MyStack
 {
@@ -32,6 +33,7 @@ MyStack<T, CONT>& MyStack<T, CONT>::operator=(MyStack<T2, CONT> lhs)
 	m_buffer.clear();
 	while (!lhs.empty())
 	{
+		//WOuld be expensive if underlying container was a vector
 		m_buffer.push_front(lhs.top());
 		lhs.pop();
 	}
@@ -64,7 +66,7 @@ T MyStack<T, CONT>::top() const
 	if (m_buffer.empty())
 		throw std::out_of_range("Empty stack");
 	return m_buffer.back();
-}
+}*/
 
 template <typename T, int MAXSIZE = 5>
 class MyStack2

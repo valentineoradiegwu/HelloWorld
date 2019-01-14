@@ -8,12 +8,25 @@
 #include "produce1consume1.h"
 #include "MyTree.h"
 #include "mylist.h"
+#include "mystack.h"
 #include <thread>
 #include "mytemplates.h"
+#include "printtuple.h"
+#include "LRUCache.h"
+#include "SetOfStacks.h"
+#include <memory>
 
 void hello()
 {
 	std::cout << "Hello Concurrent World\n";
+}
+
+void recursive_reverse(const char* input, std::string& output)
+{
+	if (*input == '\0')
+		return;
+	output = *input + output;
+	recursive_reverse(++input, output);
 }
 
 int main()
@@ -59,10 +72,9 @@ int main()
 	std::vector<int> data{ 1,2,3,4,5,6,7,8,9,10,11 };
 	std::cout << "Accummulated value = " << T2::Accumulate(data.begin(), data.end(), 10) << std::endl;
 
-	/*{
-		typedef Node<int>* NodeIntPtr;
+	{
 		MyTree<int> myTree;
-		NodeIntPtr res = myTree.find(4);
+		auto res = myTree.find(4);
 		std::cout << "The result of searching for 4 is " << res << std::endl;
 		myTree.insert(10);
 		myTree.insert(50);
@@ -70,16 +82,26 @@ int main()
 		myTree.insert(-1);
 		myTree.insert(100);
 		myTree.insert(5);
+		myTree.GetNodesPerLevel();
 
 		res = myTree.find(3);
 		if (res)
-		{
 			std::cout << "The result of searching for 3 has a value of " << res->m_data << std::endl;
-		}
 		myTree.printInOrder();
-	}*/
-	MyStack<int> my_stack;
-	my_stack.push(1);
+		std::cout << "Min = " << myTree.findMin() << std::endl;
+		std::cout << "Max = " << myTree.findMax() << std::endl;
+	}
+	
+	CustomStack<int> cust_stack;
+	cust_stack.push(1);
+
+	CustomStack<int> cust_stack2{1, 2, 3, 4, 5};
+	CustomStack<double> cust_stack3;
+	cust_stack3 = cust_stack2;
+	dbg("cust_stack3 size", cust_stack3.size());
+	CustomStack<int> cust_stack4;
+	cust_stack4 = cust_stack2;
+	CustomStack<int> cust_stack5{ CustomStack<int> {3, 5, 8} };
 
 	Val<int> my_val(7);
 	std::cout << "Type name = " << my_val.getType() << std::endl;
@@ -161,6 +183,49 @@ int main()
 
 	auto sum = ParrallelAccumulator(data);
 	std::cout << "Multi threaded sum = " << sum << std::endl;
+
+	auto lambda = [sum](int acc) {std::cout << "My 1st Lambda = " << sum + acc << std::endl; };
+	lambda(100);
+	std::string reversed;
+	recursive_reverse("Valentine", reversed);
+	std::cout << "reversed = " << reversed << std::endl;
+	std::cout << std::make_tuple(3.6, "Val", 7, true) << std::endl;
+	/*
+	1. std::unique_ptr has a specialisation for array types that overloads the subscript operator.
+	2. If a default deleter for std::unique_ptr is required, its type must be specified as a template param. This is different to the shared_ptr.
+	3. By specifying an array type as the template param, delete[] will be called
+	4. If a non array time is specified, then a default_delete with an array time must be used.
+	*/
+	std::shared_ptr<int> ptrArray{ new int[5], std::default_delete<int[]>{} };
+	std::unique_ptr<int[]> uptrArray{ new int[5] };
+	for (auto i : { 0, 1, 2, 3, 4 })
+	{
+		ptrArray.get()[i] = i;
+	}
+	for (auto i : { 0, 1, 2, 3, 4 })
+	{
+		std::cout << ptrArray.get()[i] << std::endl;
+	}
+	for (auto i : { 0, 1, 2, 3, 4 })
+	{
+		uptrArray[i] = i;
+	}
+	for (auto i : { 0, 1, 2, 3, 4 })
+	{
+		std::cout << "Unique " << uptrArray[i] << std::endl;
+	}
+	auto minmax = LargestIncreasingSubSequence(std::vector<int>{ 10, 3, 7, 9, 0, 15 });
+	std::cout << "min: " << minmax.first << " max: " << minmax.second << std::endl;
+	std::cout << "Transformed = " << replaceSpaceWithEncoding("h ueiei  u") << std::endl;
+
+	std::vector<int> numbersToSort{ -4, 7, 0, 2, 5, 9, -5, 300, 5 };
+	SelectionSort(numbersToSort.begin(), numbersToSort.end());
+	printAll(numbersToSort);
+
+	std::cout << "Bubble sort starts " << std::endl;
+	std::vector<int> numbersToSort2{ -4, 7, 0, 2, 5, 9, -5, 300, 5 };
+	BubbleSort(numbersToSort2.begin(), numbersToSort2.end());
+	printAll(numbersToSort2);
 	system("PAUSE");
 	return 0;
 }
