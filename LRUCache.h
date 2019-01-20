@@ -7,7 +7,6 @@ template <typename K, typename V>
 class LRUCache
 {
 public:
-	template <typename K, typename V>
 	struct Node
 	{
 		Node(K key, V value)
@@ -21,7 +20,7 @@ public:
 	void put(const K& key, const V& value);
 	K get(const K& key);
 	void erase(const K& key);
-	using ListType = std::list<Node<K, V>>;
+	using ListType = std::list<Node>;
 	using MapType = std::unordered_map<const K, decltype(m_list.begin())>;
 
 private:
@@ -53,7 +52,7 @@ K LRUCache<K, V>::get(const K& key)
 		m_list.erase(item->second);
 		m_cache.erase(item);
 
-		m_list.push_front(Node<K, V>{key, value});
+		m_list.push_front(Node{key, value});
 		m_cache.insert(MapType::value_type{ key, m_list.begin() });
 
 		return value;
@@ -73,7 +72,7 @@ void LRUCache<K, V>::put(const K& key, const V& value)
 	auto item = m_cache.find(key);
 	if (item == m_cache.end())
 	{
-		m_list.push_front(Node<K, V>{key, value});
+		m_list.push_front(Node{key, value});
 		m_cache.insert(MapType::value_type{ key, m_list.begin() });
 	}
 	else
@@ -84,7 +83,7 @@ void LRUCache<K, V>::put(const K& key, const V& value)
 		m_list.erase(item->second);
 		m_cache.erase(item);
 
-		m_list.push_front(Node<K, V>{key, value});
+		m_list.push_front(Node{key, value});
 		m_cache.insert(MapType::value_type{ key, m_list.begin() });
 	}
 }
