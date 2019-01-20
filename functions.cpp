@@ -124,7 +124,7 @@ int LeetLongestSubstring(const std::string& s)
 	int max = 0;
 	std::set<char> unique{};
 	/*
-	1. Keep i and walk with j until u find a char u have seen before. Add to set
+	1. Keep i and walk with j until u find a char u have seen before and add to set as u go along
 	2. If u find a repeating char, increment i, remove i from set.
 	*/
 	while (j < s.size())

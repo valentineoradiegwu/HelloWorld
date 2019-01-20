@@ -134,6 +134,7 @@ void SelectionSort(Iter begin, Iter end)
 }
 
 // Runtime O(n^2)
+// Linear in best case which is if th input is already sorted
 // Inplace
 // Stable
 // For a sorted array, we can break down algo to linear by adding a flag.
@@ -161,5 +162,55 @@ void BubbleSort(Iter begin, Iter end)
 		}
 		if (is_original_sorted) break;
 		--end;
+	}
+}
+
+// Runtime O(n^2) in worst case
+// Linear in best case which is if th input is already sorted
+// Inplace
+// Stable
+template <typename Iter>
+void InsertionSort(Iter begin, Iter end)
+{
+	Iter start = begin;
+	while (start != end)
+	{
+		auto current = start;
+		auto prev = current - 1;
+		while (prev >= begin && *current < *prev)
+		{
+			std::swap(*current, *prev);
+			--current;
+			--prev;
+		}
+		++start;
+	}
+}
+
+template<typename Iter>
+Iter Partition(Iter first, Iter last)
+{
+	auto pivot = last - 1;
+	auto partition = first;
+	for (auto iter = first; iter != pivot; ++iter)
+	{
+		if (*iter <= *pivot)
+		{
+			std::swap(*partition, *iter);
+			++partition;
+		}
+	}
+	std::swap(*partition, *pivot);
+	return partition;
+}
+
+template <typename Iter>
+void QuickSort(Iter begin, Iter end)
+{
+	if (std::distance(begin, end) > 1)
+	{
+		auto partitionIter = Partition(begin, end);
+		QuickSort(begin, partitionIter);
+		QuickSort(partitionIter + 1, end);
 	}
 }

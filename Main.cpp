@@ -226,6 +226,21 @@ int main()
 	std::vector<int> numbersToSort2{ -4, 7, 0, 2, 5, 9, -5, 300, 5 };
 	BubbleSort(numbersToSort2.begin(), numbersToSort2.end());
 	printAll(numbersToSort2);
+
+	std::cout << "Insertion sort starts " << std::endl;
+	std::vector<int> numbersToSort3{ -4, 7, 0, 2, 5, 9, -5, 300, 5 };
+	BubbleSort(numbersToSort3.begin(), numbersToSort3.end());
+	printAll(numbersToSort3);
+
+	std::cout << "Partition starts " << std::endl;
+	std::vector<int> numbersToPartition{ 7, 2, 1, 6, 8, 5, 3, 4};
+	Partition(numbersToPartition.begin(), numbersToPartition.end());
+	printAll(numbersToPartition);
+
+	std::cout << "Quick sort starts " << std::endl;
+	std::vector<int> numbersToSort4{ -4, 7, 0, 2, 5, 9, -5, 300, 5 };
+	QuickSort(numbersToSort4.begin(), numbersToSort4.end());
+	printAll(numbersToSort4);
 	system("PAUSE");
 	return 0;
 }
