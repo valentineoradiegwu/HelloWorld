@@ -30,6 +30,9 @@
     <ClCompile Include="complex.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="mystring.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="functions.h">
@@ -72,6 +75,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Singleton.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="mystring.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

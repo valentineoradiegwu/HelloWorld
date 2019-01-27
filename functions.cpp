@@ -572,6 +572,24 @@ bool IsSentenceInString(const std::string& ransom, const std::string& dictionary
 	return true;
 }
 
+int fib(int n)
+{
+	if (n <= 1)
+		return 1;
+
+	int prev = 0;
+	int current = 1;
+	int fib = 0;
+
+	for (int i = 1; i < n; ++i)
+	{
+		fib = current + prev;
+		prev = current;
+		current = fib;
+	}
+	return fib;
+}
+
 template <typename T>
 std::string getType(const T& arg)
 {

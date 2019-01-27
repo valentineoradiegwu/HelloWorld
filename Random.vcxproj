@@ -117,6 +117,7 @@
     <ClCompile Include="complex.cpp" />
     <ClCompile Include="functions.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="mystring.cpp" />
     <ClCompile Include="produce1consume1.cpp" />
     <ClCompile Include="producerconsumer.cpp" />
   </ItemGroup>
@@ -128,6 +129,7 @@
     <ClInclude Include="mylist.h" />
     <ClInclude Include="myshared.h" />
     <ClInclude Include="mystack.h" />
+    <ClInclude Include="mystring.h" />
     <ClInclude Include="mytemplates.h" />
     <ClInclude Include="MyTree.h" />
     <ClInclude Include="printtuple.h" />

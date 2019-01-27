@@ -241,6 +241,9 @@ int main()
 	std::vector<int> numbersToSort4{ -4, 7, 0, 2, 5, 9, -5, 300, 5 };
 	QuickSort(numbersToSort4.begin(), numbersToSort4.end());
 	printAll(numbersToSort4);
+
+	for (auto i : { 1, 2, 3, 4, 5, 6, 7 })
+		std::cout << "fib" << i << " = " << fib(i) << "\n";
 	system("PAUSE");
 	return 0;
 }

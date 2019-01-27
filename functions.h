@@ -26,6 +26,7 @@ std::string replaceSpaceWithEncoding(char* input);
 bool is_substr(const char* input1, const char* input2);
 int UtopianTree(int cycles);
 int myAtoi(std::string str);
+int fib(int n);
 template <typename T>
 void dbg(const std::string& annotation, const T& item)
 {
