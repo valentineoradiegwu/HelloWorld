@@ -15,6 +15,7 @@
 #include "LRUCache.h"
 #include "SetOfStacks.h"
 #include <memory>
+#include <climits>
 
 void hello()
 {
@@ -244,6 +245,18 @@ int main()
 
 	for (auto i : { 1, 2, 3, 4, 5, 6, 7 })
 		std::cout << "fib" << i << " = " << fib(i) << "\n";
+	std::cout << "max sub list " << LeetMaximumSubarraySum(std::vector<int>{ -100, 2, 98, 5, 1, 4 }, 5) << std::endl;
+	std::cout << "max sub list " << LeetMaximumSubarraySum(std::vector<int>{ -2, -1, 2, 1}, 1) << std::endl;
+	PrintDistinctNumbersWithPairs1(std::vector<int>{ 1, 2, 3, 2, 1, 4});
+	PrintDistinctNumbersWithPairs1(std::vector<int>{ 2, 1, 3, 2});
+	std::vector<int> in{ 1, 3, 5, 7 };
+	mergeSortedArrays(in, std::vector<int>{1, 3, 5, 7});
+	printAll(in);
+
+	std::cout << "Has element 301 ? " << bin_search_recurse(numbersToSort4.begin(), numbersToSort4.end(), 301) << std::endl;
+	std::cout << "Has element 300 ? " << bin_search_recurse(numbersToSort4.begin(), numbersToSort4.end(), 300) << std::endl;
+	std::cout << MergeStrings(std::vector<std::string>{"valentine", "oradiegwu"}) << std::endl;
+	std::cout << "Minimum value for int: " << std::numeric_limits<int>::max() << '\n';
 	system("PAUSE");
 	return 0;
 }

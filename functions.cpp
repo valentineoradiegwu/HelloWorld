@@ -1,5 +1,6 @@
 #include "functions.h"
 #include <map>
+#include <unordered_map>
 #include <set>
 #include <limits.h>
 #include <algorithm>
@@ -171,6 +172,89 @@ std::vector<std::vector<int> > LeetThreeSum(std::vector<int>& nums)
 		}
 	}
 	return res;
+}
+
+
+int LeetsubarraySum(std::vector<int>& nums, int k) 
+{
+	auto res = 0;
+	auto sum = 0;
+	std::unordered_map<int, int> prevSums;
+	for (auto i : nums)
+	{
+		sum += i;
+		if (sum == k)
+			++res;
+		if (prevSums.find(sum - k) != prevSums.end())
+			res += prevSums[sum - k];
+		prevSums[sum]++;
+	}
+	return res;
+}
+
+/*
+There are probably 2 ways to play this. 
+1. We store the sum at each index against its index in a map. Only store if we are seing for first time since we want the maximum length so the more left the better
+2. During each iter we check if the current sum minus k already exists. If it does we have a subarray then move to 3. 
+3. check the difference btw current index and index stored against its compliment
+ During
+*/
+int LeetMaximumSubarraySum(std::vector<int>& nums, int k)
+{
+	auto maxLength = 0;
+	auto sum = 0;
+	std::unordered_map<int, int> prevSums;
+	prevSums.insert({ sum, -1 });
+	for (auto i = 0; i < nums.size(); ++i)
+	{
+		sum += nums[i];
+		auto complement = prevSums.find(sum - k);
+		if (complement != prevSums.end())
+			maxLength = std::max(maxLength, i - complement->second);
+		prevSums.insert({sum, i});
+	}
+	return maxLength;
+}
+
+/*
+You are given an array A containing 2*N+2 positive numbers, out of which 2*N numbers exist in pairs whereas the other two number occur exactly once and are distinct. 
+You need to find the other two numbers and print them in ascending order.
+*/
+void PrintDistinctNumbersWithPairs(std::vector<int>& nums)
+{
+	std::map<int, int> freqs;
+	for (int i : nums)
+	{
+		freqs[i]++;
+	}
+	for (auto& iter : freqs)
+	{
+		if (iter.second == 1)
+			std::cout << iter.first << std::endl;
+	}
+}
+
+void PrintDistinctNumbersWithPairs1(std::vector<int>& nums)
+{
+	std::sort(nums.begin(), nums.end());
+	auto begin = nums.begin();
+	while (begin < nums.end())
+	{
+		auto next = begin + 1;
+
+		if (next == nums.end() || *begin != *next)
+		{
+			//If next is end then begin is the last element
+			//If next is not equal to current then we are a solitary element.
+			std::cout << *begin << std::endl;
+			++begin;
+		}
+		else
+		{
+			begin += 2;
+		}
+
+	}
 }
 
 void reverseFunc(char* input)
@@ -457,6 +541,30 @@ int UtopianTree(int cycles)
 	}
 	return height;
 }
+
+std::string MergeStrings(const std::vector<std::string>& iInput)
+{
+	char myArray[26] = { 0 };
+	for (auto& eachString : iInput)
+	{
+		for (auto eachChar : eachString)
+		{
+			myArray[eachChar - 'a']++;
+		}
+	}
+
+	std::string result;
+	for (int i = 0; i < 26; ++i)
+	{
+
+		for (int j = 0; j < myArray[i]; ++j)
+		{
+			result += 'a' + i;
+		}
+	}
+	return result;
+}
+
 
 std::vector<std::vector<int> > LeetThreeSum2(std::vector<int>& nums)
 {

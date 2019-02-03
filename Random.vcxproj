@@ -129,6 +129,7 @@
     <ClInclude Include="mylist.h" />
     <ClInclude Include="myshared.h" />
     <ClInclude Include="mystack.h" />
+    <ClInclude Include="mystackconstmin.h" />
     <ClInclude Include="mystring.h" />
     <ClInclude Include="mytemplates.h" />
     <ClInclude Include="MyTree.h" />

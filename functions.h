@@ -2,6 +2,7 @@
 #include <vector>
 #include <iostream>
 #include <stdexcept>      // std::invalid_argument
+#include <iterator>
 
 std::vector<int> LeetTwoSum(const std::vector<int>& numbers, int target);
 std::vector<int> LeetTwoSum2(const std::vector<int>& numbers, int target);
@@ -12,6 +13,10 @@ bool LeetIsPalindrome(int x);
 int LeetLongestSubstring(const std::string& s);
 std::vector<std::vector<int> > LeetThreeSum(std::vector<int>& nums);
 std::vector<std::vector<int> > LeetThreeSum2(std::vector<int>& nums);
+int LeetsubarraySum(std::vector<int>& nums, int k);
+int LeetMaximumSubarraySum(std::vector<int>& nums, int k);
+void PrintDistinctNumbersWithPairs(std::vector<int>& nums);
+void PrintDistinctNumbersWithPairs1(std::vector<int>& nums);
 void reverseFunc(char* input);
 int Factorial(int i);
 bool unique_chars(const char* input);
@@ -19,6 +24,7 @@ bool unique_chars2(const char* input);
 void remove_dupes(char* input);
 void remove_dupes2(char* input);
 void remove_dupes3(char* input);
+std::string MergeStrings(const std::vector<std::string>& iInput);
 void setZeros(int matrix[][4]);
 int myStrCmp(const char* input1, const char* input2);
 bool are_anagrams(const char* input1, const char* input2);
@@ -95,8 +101,8 @@ std::pair<size_t, size_t> LargestIncreasingSubSequence(const std::vector<T>& inp
 }
 
 
-template <typename Iter, typename T>
-bool binary_search(Iter begin, Iter end, T key)
+template <typename Iter>
+bool bin_search(Iter begin, Iter end, const typename std::iterator_traits<Iter>::value_type& key)
 {
 	while (begin < end)
 	{
@@ -109,6 +115,21 @@ bool binary_search(Iter begin, Iter end, T key)
 			begin = middle + 1;
 	}
 	return false;
+}
+
+template <typename Iter>
+bool bin_search_recurse(Iter begin, Iter end, const typename std::iterator_traits<Iter>::value_type& key)
+{
+	if (begin >= end)
+		return false;
+
+	auto middle = begin + std::distance(begin, end) / 2;
+	if (*middle == key)
+		return true;
+	else if (*middle > key)
+		return bin_search_recurse(begin, middle, key);
+	else
+		return bin_search_recurse(middle + 1, end, key);
 }
 
 // Runtime O(n^2)
@@ -213,5 +234,33 @@ void QuickSort(Iter begin, Iter end)
 		auto partitionIter = Partition(begin, end);
 		QuickSort(begin, partitionIter);
 		QuickSort(partitionIter + 1, end);
+	}
+}
+
+//The usual way for merge sorted list would be to start from the beginning of the 2 arrays.
+//The question we are trying to solve was one around merging the second into the first and
+//hence why we have gone from the back of the lists.
+template <typename T>
+void mergeSortedArrays(std::vector<T>& first, const std::vector<T>& second)
+{
+	auto originalsize = first.size();
+	first.resize(first.size() + second.size());
+	auto tail = first.rbegin();
+	auto firstTail = first.rbegin() + originalsize;
+	auto secondTail = second.rbegin();
+	while (firstTail != first.rend() && secondTail != second.rend())
+	{
+		if (*firstTail > *secondTail)
+		{
+			*tail++ = *firstTail++;
+		}
+		else
+		{
+			*tail++ = *secondTail++;
+		}
+	}
+	while (secondTail != second.rend())
+	{
+		*tail++ = *secondTail++;
 	}
 }
