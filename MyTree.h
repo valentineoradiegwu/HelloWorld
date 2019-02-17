@@ -37,6 +37,7 @@ public:
 	T findMax() const;
 	~MyTree();
 	void GetNodesPerLevel() const;
+	//static friend int GetKthLargestNode(Node<T>* tree, int K);
 private:
 	Node<T>* m_root;
 	void doInsert(Node<T>*& current, const T& item);

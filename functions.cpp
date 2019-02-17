@@ -556,11 +556,8 @@ std::string MergeStrings(const std::vector<std::string>& iInput)
 	std::string result;
 	for (int i = 0; i < 26; ++i)
 	{
-
-		for (int j = 0; j < myArray[i]; ++j)
-		{
-			result += 'a' + i;
-		}
+		if (myArray[i] > 0)
+			result.append(myArray[i], 'a' + i);
 	}
 	return result;
 }

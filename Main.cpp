@@ -16,6 +16,8 @@
 #include "SetOfStacks.h"
 #include <memory>
 #include <climits>
+#include <iterator>
+#include "ParallelAccumulate.h"
 
 void hello()
 {
@@ -257,6 +259,27 @@ int main()
 	std::cout << "Has element 300 ? " << bin_search_recurse(numbersToSort4.begin(), numbersToSort4.end(), 300) << std::endl;
 	std::cout << MergeStrings(std::vector<std::string>{"valentine", "oradiegwu"}) << std::endl;
 	std::cout << "Minimum value for int: " << std::numeric_limits<int>::max() << '\n';
+	std::vector<int> out{};
+	std::vector<int> one{0, 2, 3, 4};
+	std::vector<int> two{ 1, 2, 3, 5, 6 };
+	intersectTwoSortedRanges(one.begin(), one.end(), two.begin(), two.end(), std::back_inserter(out));
+	printAll(out);
+
+	std::shared_ptr<int> aPtr1{};
+	std::cout << "Use count aPtr1 = " << aPtr1.use_count() << std::endl;
+	std::shared_ptr<int> aPtr2{ aPtr1 };
+	std::cout << "Use count aPtr1 = " << aPtr1.use_count() << std::endl;
+	std::shared_ptr<int> bPtr1{static_cast<int*>(0)};
+	std::cout << "Use count bPtr1 = " << bPtr1.use_count() << std::endl;
+	std::shared_ptr<int> bPtr2{ bPtr1 };
+	std::cout << "Use count bPtr1 = " << bPtr1.use_count() << std::endl;
+	std::shared_ptr<int> cPtr1{nullptr};
+	std::cout << "Use count cPtr1 = " << cPtr1.use_count() << std::endl;
+	std::shared_ptr<int> cPtr2{ cPtr1 };
+	std::cout << "Use count cPtr1 = " << cPtr1.use_count() << std::endl;
+	std::vector<int> input{ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25 };
+	std::cout << "res = " << ParallelAccumulate(input, 0) << std::endl;
+
 	system("PAUSE");
 	return 0;
 }

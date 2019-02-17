@@ -264,3 +264,26 @@ void mergeSortedArrays(std::vector<T>& first, const std::vector<T>& second)
 		*tail++ = *secondTail++;
 	}
 }
+
+template <typename InIter, typename OutIter>
+OutIter intersectTwoSortedRanges(InIter begin1, InIter end1, InIter begin2, InIter end2, OutIter start)
+{
+	while (begin1 != end1 && begin2 != end2)
+	{
+		if (*begin1 == *begin2)
+		{
+			*start++ = *begin1;
+			++begin1;
+			++begin2;
+		}
+		else if (*begin1 < *begin2)
+		{
+			++begin1;
+		}
+		else
+		{
+			++begin2;
+		}
+	}
+	return start;
+}
