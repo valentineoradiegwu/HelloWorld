@@ -20,6 +20,8 @@
 #include "ParallelAccumulate.h"
 #include "ThreadSafeList.h"
 #include "LRUCache.h"
+#include "rep_client.h"
+#include "rep_server.h"
 
 void hello()
 {
@@ -260,7 +262,7 @@ int main()
 	std::cout << "Has element 301 ? " << bin_search_recurse(numbersToSort4.begin(), numbersToSort4.end(), 301) << std::endl;
 	std::cout << "Has element 300 ? " << bin_search_recurse(numbersToSort4.begin(), numbersToSort4.end(), 300) << std::endl;
 	std::cout << MergeStrings(std::vector<std::string>{"valentine", "oradiegwu"}) << std::endl;
-	std::cout << "Minimum value for int: " << std::numeric_limits<int>::max() << '\n';
+	//std::cout << "Minimum value for int: " << std::numeric_limits<int>::max() << '\n';
 	std::vector<int> out{};
 	std::vector<int> one{0, 2, 3, 4};
 	std::vector<int> two{ 1, 2, 3, 5, 6 };
@@ -282,6 +284,11 @@ int main()
 	std::vector<int> input{ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25 };
 	std::cout << "res = " << ParallelAccumulate(input, 0) << std::endl;
 	ThreadSafeList<int> stack{};
+
+	auto server = std::thread{ Rep_Server{} };
+	auto client = std::thread{ Rep_Client{} };
+	server.detach();
+	client.join();
 
 	system("PAUSE");
 	return 0;
