@@ -130,8 +130,7 @@ int LeetLongestSubstring(const std::string& s)
 	*/
 	while (j < s.size())
 	{
-		auto iter = unique.find(s[j]);
-		if (iter == unique.end())
+		if (unique.find(s[j]) == unique.end())
 		{
 			unique.insert(s[j]);
 			++j;

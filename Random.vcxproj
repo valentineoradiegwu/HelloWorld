@@ -133,12 +133,14 @@
     <ClInclude Include="mystring.h" />
     <ClInclude Include="mytemplates.h" />
     <ClInclude Include="MyTree.h" />
+    <ClInclude Include="MyVector.h" />
     <ClInclude Include="ParallelAccumulate.h" />
     <ClInclude Include="printtuple.h" />
     <ClInclude Include="produce1consume1.h" />
     <ClInclude Include="producerconsumer.h" />
     <ClInclude Include="SetOfStacks.h" />
     <ClInclude Include="Singleton.h" />
+    <ClInclude Include="ThreadSafeList.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

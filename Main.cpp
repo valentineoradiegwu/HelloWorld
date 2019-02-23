@@ -18,6 +18,8 @@
 #include <climits>
 #include <iterator>
 #include "ParallelAccumulate.h"
+#include "ThreadSafeList.h"
+#include "LRUCache.h"
 
 void hello()
 {
@@ -279,6 +281,7 @@ int main()
 	std::cout << "Use count cPtr1 = " << cPtr1.use_count() << std::endl;
 	std::vector<int> input{ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25 };
 	std::cout << "res = " << ParallelAccumulate(input, 0) << std::endl;
+	ThreadSafeList<int> stack{};
 
 	system("PAUSE");
 	return 0;

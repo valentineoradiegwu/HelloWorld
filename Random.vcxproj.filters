@@ -86,5 +86,11 @@
     <ClInclude Include="ParallelAccumulate.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ThreadSafeList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MyVector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
