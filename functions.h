@@ -7,6 +7,7 @@
 std::vector<int> LeetTwoSum(const std::vector<int>& numbers, int target);
 std::vector<int> LeetTwoSum2(const std::vector<int>& numbers, int target);
 std::vector<int> LeetTwoSumSorted(const std::vector<int>& numbers, int target);
+std::vector<std::pair<int, int>> twoSumSortedAllMatches(const std::vector<int>& nums, int target);
 int LeetReverseInt(int input);
 int LeetAtoi(const std::string& input);
 bool LeetIsPalindrome(int x);
@@ -33,6 +34,8 @@ bool is_substr(const char* input1, const char* input2);
 int UtopianTree(int cycles);
 int myAtoi(std::string str);
 int fib(int n);
+size_t CountBitsInInt(int input);
+std::string multiplyStrings(const std::string& first, const std::string& second);
 template <typename T>
 void dbg(const std::string& annotation, const T& item)
 {

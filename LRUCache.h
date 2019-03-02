@@ -41,7 +41,7 @@ LRUCache<K, V>::LRUCache(size_t size)
 template <typename K, typename V>
 K LRUCache<K, V>::get(const K& key)
 {
-	std::lock_guard<std::mutex>{m_lock};
+	std::lock_guard<std::mutex> lock{m_lock};
 	auto item = m_cache.find(key);
 	if (item == m_cache.end())
 	{
@@ -57,7 +57,7 @@ K LRUCache<K, V>::get(const K& key)
 template <typename K, typename V>
 void LRUCache<K, V>::put(const K& key, const V& value)
 {
-	std::lock_guard<std::mutex>{m_lock};
+	std::lock_guard<std::mutex> lock{m_lock};
 	if (m_cache.size() > m_maxsize)
 	{
 		auto key = m_list.back().m_key;

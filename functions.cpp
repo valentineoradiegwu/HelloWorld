@@ -155,20 +155,80 @@ std::vector<std::vector<int> > LeetThreeSum(std::vector<int>& nums)
 		return res;
 
 	std::sort(nums.begin(), nums.end());
-	int sum = 0;
-
-	for (size_t i = 0; i < nums.size(); ++i)
+	auto const size = nums.size();
+	for (int i = 0; i < nums.size() - 2; ++i)
 	{
-		for (size_t j = i + 2; j < nums.size(); ++j)
-		{
-			sum = nums[i] + nums[i + 1] + nums[j];
-			if ( sum == 0)
-			{
-				std::cout << nums[i] << "," << nums[i + 1] << "," << nums[j] << std::endl;
-				res.push_back({ nums[i], nums[i + 1], nums[j]});
-			}
+		if (i > 0 && nums[i] == nums[i - 1])
+			continue;
 
+		auto low = i + 1;
+		auto high = size - 1;
+		auto two_sum_target = 0 - nums[i];
+
+		while (low < high)
+		{
+			auto sum = nums[low] + nums[high];
+			if (sum == two_sum_target)
+			{
+				std::vector<int> aResult{ nums[i], nums[low], nums[high] };
+				res.push_back(aResult);
+				++low;
+				--high;
+				while (low < high && nums[low] == nums[low - 1])
+					++low;
+				while (low < high && nums[high] == nums[high + 1])
+					--high;
+			}
+			else if (sum < two_sum_target)
+				++low;
+			else
+				--high;
 		}
+
+	}
+	return res;
+}
+
+std::vector<std::pair<int, int>> twoSumSortedAllMatches(const std::vector<int>& nums, int target)
+{
+	std::vector<std::pair<int, int>> res{};
+	if (nums.empty())
+		return res;
+
+	auto low = 0;
+	auto high = nums.size() - 1;
+
+	while (low < high)
+	{
+		//Take care of non-uniques
+		//An alternative is to use 2 extra while loops to advance low and high thereby exhausting
+		//the duplicates
+		const auto isLowSameAsPrev = low > 0 && nums[low] == nums[low - 1];
+		const auto isHighSameAsPrev = high < nums.size() - 1 && nums[high] == nums[high + 1];
+		if (isLowSameAsPrev || isHighSameAsPrev)
+		{
+			if (isLowSameAsPrev)
+			{
+				++low;
+			}
+			if (isHighSameAsPrev)
+			{
+				--high;
+			}
+			continue;
+		}
+	
+		auto sum = nums[low] + nums[high];
+		if (sum == target)
+		{
+			res.push_back({ low, high });
+			++low;
+			--high;
+		}
+		else if (sum > target)
+			--high;
+		else
+			++low;
 	}
 	return res;
 }
@@ -282,6 +342,17 @@ int Factorial(int i)
 	{
 		return i * Factorial(i - 1);
 	}
+}
+
+size_t CountBitsInInt(int input)
+{
+	size_t count = 0;
+	while (input > 0)
+	{
+		if (input & 1 == 1) ++count;
+		input >>= 1;
+	}
+	return count;
 }
 
 bool unique_chars(const char* input)
@@ -692,6 +763,34 @@ int fib(int n)
 		current = fib;
 	}
 	return fib;
+}
+
+// When subtracting from a size_t, u have to be careful.
+// 0 - 1 where 0 is held in size_t results in a very large int and not -1
+// Becareful with your use of auto as a variable maybe declared size_t without u knowing.
+std::string multiplyStrings(const std::string& first, const std::string& second)
+{
+	const auto sizeFirst = first.size();
+	const auto sizeSecond = second.size();
+	std::string result( sizeFirst + sizeSecond , '0');
+
+	for (int i = sizeFirst - 1; i >= 0; --i)
+	{
+		int carry = 0;
+		for (int j = sizeSecond - 1; j >= 0; --j)
+		{
+			const int idx = i + j + 1;
+			int mult = (first[i] - '0') * (second[j] - '0') + carry + (result[idx] - '0');
+			result[idx] = mult % 10 + '0';
+			carry = mult / 10;
+		}
+		result[i] += carry;
+	}
+
+	const auto startpos = result.find_first_not_of("0");
+	if (std::string::npos != startpos)
+		return result.substr(startpos);
+	return "0";
 }
 
 template <typename T>

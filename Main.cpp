@@ -19,7 +19,6 @@
 #include <iterator>
 #include "ParallelAccumulate.h"
 #include "ThreadSafeList.h"
-#include "LRUCache.h"
 #include "rep_client.h"
 #include "rep_server.h"
 
@@ -34,6 +33,14 @@ void recursive_reverse(const char* input, std::string& output)
 		return;
 	output = *input + output;
 	recursive_reverse(++input, output);
+}
+
+std::string recursive_reverse2(const std::string& input)
+{
+	if (input.empty())
+		return "";
+
+	return recursive_reverse2(input.substr(1)) + input[0];
 }
 
 int main()
@@ -269,6 +276,10 @@ int main()
 	intersectTwoSortedRanges(one.begin(), one.end(), two.begin(), two.end(), std::back_inserter(out));
 	printAll(out);
 
+	auto twoSum = twoSumSortedAllMatches(std::vector<int>{1, 1, 2, 3, 4, 5, 6, 7, 7, 8, 9}, 8);
+	for (auto& item : twoSum)
+		std::cout << item.first << ":" << item.second << std::endl;
+
 	std::shared_ptr<int> aPtr1{};
 	std::cout << "Use count aPtr1 = " << aPtr1.use_count() << std::endl;
 	std::shared_ptr<int> aPtr2{ aPtr1 };
@@ -284,6 +295,9 @@ int main()
 	std::vector<int> input{ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25 };
 	std::cout << "res = " << ParallelAccumulate(input, 0) << std::endl;
 	ThreadSafeList<int> stack{};
+
+	std::cout << "Number of set bits = " << CountBitsInInt(7) << std::endl;
+	std::cout << "Multiply = " << multiplyStrings("999", "999") << std::endl;
 
 	auto server = std::thread{ Rep_Server{} };
 	auto client = std::thread{ Rep_Client{} };
