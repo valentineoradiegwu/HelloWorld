@@ -244,7 +244,7 @@ int main()
 
 	std::cout << "Insertion sort starts " << std::endl;
 	std::vector<int> numbersToSort3{ -4, 7, 0, 2, 5, 9, -5, 300, 5 };
-	BubbleSort(numbersToSort3.begin(), numbersToSort3.end());
+	InsertionSort(numbersToSort3.begin(), numbersToSort3.end());
 	printAll(numbersToSort3);
 
 	std::cout << "Partition starts " << std::endl;

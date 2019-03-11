@@ -233,15 +233,26 @@ void InsertionSort(Iter begin, Iter end)
 	while (start != end)
 	{
 		auto current = start;
-		auto prev = current - 1;
-		//while (current > begin && *current < *prev) same effect as below.
-		while (prev >= begin && *current < *prev)
+		while (current > begin && *current < *(current - 1))
 		{
-			std::swap(*current, *prev);
+			std::swap(*current, *(current - 1));
 			--current;
-			--prev;
 		}
 		++start;
+	}
+}
+
+template <typename T>
+void InsertSort(std::vector<T>& input)
+{
+	for (auto i = 0; i < input.size(); ++i)
+	{
+		auto j = i;
+		while (j > 0 && input[j] < input[j - 1])
+		{
+			std::swap(input[j], input[j - 1]);
+			j--;
+		}
 	}
 }
 
