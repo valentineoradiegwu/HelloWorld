@@ -134,6 +134,7 @@
     <ClInclude Include="functions.h" />
     <ClInclude Include="LRUCache.h" />
     <ClInclude Include="mylist.h" />
+    <ClInclude Include="MyPair.h" />
     <ClInclude Include="myshared.h" />
     <ClInclude Include="mystack.h" />
     <ClInclude Include="mystackconstmin.h" />

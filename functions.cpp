@@ -189,6 +189,36 @@ std::vector<std::vector<int> > LeetThreeSum(std::vector<int>& nums)
 	return res;
 }
 
+//right appears redundant. Can be substituted by i
+std::pair<int, int> FindLargestIncreasingSubSequence(const std::vector<int>& input)
+{
+	if (input.empty())
+		return{ 0, 0 };
+
+	int left = 0;
+	int right = 0;
+	int leftMax = 0;
+	int rightMax = 0;
+
+	for (auto i = 1; i < input.size(); ++i)
+	{
+		if (input[i] > input[i - 1])
+		{
+			right = i;
+			if ((right - left + 1) > (rightMax - leftMax + 1))
+			{
+				leftMax = left;
+				rightMax = right;
+			}
+		}
+		else
+		{
+			left = i;
+		}
+	}
+	return { leftMax, rightMax };
+}
+
 std::vector<std::pair<int, int>> twoSumSortedAllMatches(const std::vector<int>& nums, int target)
 {
 	std::vector<std::pair<int, int>> res{};
@@ -332,6 +362,35 @@ void reverseFunc(char* input)
 	}
 }
 
+void reverse(char* input, char* end)
+{
+	if (!input)
+		return;
+
+	char* start = input;
+	for (; start < end; ++start, --end)
+	{
+		std::swap(*start, *end);
+	}
+}
+
+void reverseWords(char* input)
+{
+	auto len = strlen(input);
+	reverse(input, input + len - 1);
+	char* left = input;
+	char* right = input;
+	char* end = input + len;
+	for (; right <= end; ++right)
+	{
+		if (*right == ' ' || *right == '\0')
+		{
+			reverse(left, right - 1);
+			left = right + 1;
+		}
+	}
+}
+
 int Factorial(int i)
 {
 	if (i == 1)
@@ -349,7 +408,7 @@ size_t CountBitsInInt(int input)
 	size_t count = 0;
 	while (input > 0)
 	{
-		if (input & 1 == 1) ++count;
+		if ((input & 1) == 1) ++count;
 		input >>= 1;
 	}
 	return count;
@@ -474,6 +533,58 @@ bool are_anagrams(const char* input1, const char* input2)
 	return false;
 }
 
+bool are_anagrams2(const std::string& one, const std::string& two)
+{
+	if (one.size() != two.size())
+		return false;
+
+	int map[256] = { 0 };
+	int unique_chars = 0;
+
+	for (char eachChar : one)
+	{
+		if (map[eachChar] == 0)
+			++unique_chars;
+		map[eachChar]++;
+	}
+
+	for (auto i = 0; i < two.size(); ++i)
+	{
+		if (map[two[i]] == 0)
+			return false;
+		--map[two[i]];
+		if (map[two[i]] == 0)
+			--unique_chars;
+		if (unique_chars == 0)
+			return (i == two.size() - 1);
+	}
+	return false;
+}
+
+/*
+Given a dictionary of English words, return the set of all words grouped into 
+set of words that are anagrams.
+*/
+
+std::vector<std::vector<std::string>> Anagrams(const std::vector<std::string>& dictionary)
+{
+	std::unordered_map<std::string, std::vector<std::string>> words{};
+	std::vector<std::vector<std::string>> res{};
+	for (const auto& eachWord : dictionary)
+	{
+		std::string key{ eachWord };
+		std::sort(key.begin(), key.end());
+		words[key].push_back(eachWord);
+	}
+
+	for (const auto& pair : words)
+	{
+		if (pair.second.size() > 1)
+			res.push_back(pair.second);
+	}
+	return res;
+}
+
 std::string replaceSpaceWithEncoding(char* input)
 {
 	int spaceCount = 0;
@@ -554,7 +665,7 @@ int myStrCmp(const char* input1, const char* input2)
 	{
 		if (!*input2)
 			return 1;
-		if (*input1 > *input2)
+		if (*input2 < *input1)
 			return 1;
 		if (*input1 < *input2)
 			return -1;
@@ -568,7 +679,8 @@ int myStrCmp(const char* input1, const char* input2)
 	return 0;
 }
 
-// If the string is boomboomboomd, will your algorithm return true for a substring boomboomd?
+// If the string is boomboomboomd, will your algorithm return true for a substring boomboomd? It does but may be suboptimal.
+// The Boyer-Moore string search algo appears to be the fastest theoretically.
 bool is_substr(const char* input1, const char* input2)
 {
 	//obviously u should check if the length ofsubstring satisfies a few considerations
@@ -593,6 +705,59 @@ bool is_substr(const char* input1, const char* input2)
 		}
 	}
 	return false;
+}
+
+int BinSearchArray(int input[], int length, int key)
+{
+	int low = 0;
+	int high = length - 1;
+
+	while (low <= high)
+	{
+		int middle = low + (high - low) / 2;
+		if (input[middle] == key)
+			return middle;
+		else if (input[middle] < key)
+			low = middle + 1;
+		else
+			high = middle - 1;
+	}
+	return -1;
+}
+
+// 1. If we find a match at mid and the previous field is not equal to us, then we are the first occurence. Return index.
+// 2. If we find a match but the prev field is equal to us, then we treat as if the mid point is greater so we move high left.
+// 1, 2, 3, 3, 3, 3, 4
+int binSearchFirstOccurence(const std::vector<int>& input, int key)
+{
+	int low = 0;
+	int high = input.size() - 1;
+	while (low <= high)
+	{
+		int mid = low + (high - low) / 2;
+		if (input[mid] == key && (mid == 0 || input[mid - 1] != input[mid]))
+			return mid;
+		else if (input[mid] >= key)
+			high = mid - 1;
+		else
+			low = mid + 1;
+	}
+	return -1;
+}
+
+int BinFindFirstLargerThanK(const std::vector<int>& input, int key)
+{
+	int left = 0;
+	int right = input.size() - 1;
+	while (left != right)
+	{
+		int mid = left + (right - left) / 2;
+		if (input[mid] <= key)
+			left = mid + 1;
+		else
+			right = mid;
+	}
+	return left == input.size() ? -1 : left;
 }
 
 int UtopianTree(int cycles)
@@ -630,59 +795,6 @@ std::string MergeStrings(const std::vector<std::string>& iInput)
 			result.append(myArray[i], 'a' + i);
 	}
 	return result;
-}
-
-
-std::vector<std::vector<int> > LeetThreeSum2(std::vector<int>& nums)
-{
-	std::vector<std::vector<int> > res{};
-
-	if (nums.size() < 3)
-		return res;
-
-	std::sort(nums.begin(), nums.end());
-	int sum = 0;
-	int a = 0;
-	int b = 0;
-	int c = 0;
-	int start = 0;
-	int end = nums.size() - 1;
-
-	for (size_t i = 0; i < nums.size() - 2; ++i)
-	{
-		if (i > 0 && nums[i] == nums[i - 1])
-			continue;
-		start = i + 1;
-		a = nums[i];
-		while (start < end)
-		{
-			if (start > i + 1 && nums[start] == nums[start - 1])
-			{
-				++start;
-				continue;
-			}
-			b = nums[start];
-			c = nums[end];
-			sum = a + b + c;
-			if (sum == 0)
-			{
-				std::cout << a << "," << b << "," << c << std::endl;
-				res.push_back({ a, b, c });
-				--end;
-				++start;
-			}
-			else if (sum > 0)
-			{
-				--end;
-			}
-			else
-			{
-				++start;
-			}
-
-		}
-	}
-	return res;
 }
 
 int myAtoi(std::string str) 
@@ -747,6 +859,43 @@ bool IsSentenceInString(const std::string& ransom, const std::string& dictionary
 	return true;
 }
 
+//This is done in a character by character basis rather than a word by word basis as above.
+bool IsSentenceInString2(const std::string& letter, const std::string& magazine)
+{
+	int chars[256] = { 0 };
+	for (auto c : magazine)
+		++chars[c];
+	for (auto c : letter)
+	{
+		if (chars[c] > 0)
+		{
+			--chars[c];
+		}
+		else
+			return false;
+	}
+	return true;
+}
+//You need to know how hash maps work out the index to store a key to understand this solution
+//There are a few variations to the problem and one is to find the smallest +ve number. I think we 
+//will go for that.
+int missing_integer(std::vector<int> input)
+{
+	std::vector<int> bitVector(input.size() + 1);
+	for (auto i : input)
+	{
+		if(i > 0)
+			bitVector[i % (input.size() + 1)] = 1;
+	}
+
+	for (auto i = 0; i < bitVector.size(); ++i)
+	{
+		if (bitVector[i] == 0)
+			return i;
+	}
+	return -1;
+}
+
 int fib(int n)
 {
 	if (n <= 1)
@@ -763,6 +912,43 @@ int fib(int n)
 		current = fib;
 	}
 	return fib;
+}
+
+int squareRoot(int input)
+{
+	int i = 1;
+	int res = i * i;
+	while (res <= input)
+	{
+		++i;
+		res = i * i;
+	}
+	return i - 1;
+}
+
+int squareRoot2(int input)
+{
+	int low = 0;
+	int high = input;
+	int res;
+	while (low <= high)
+	{
+		int mid = low + (high - low) / 2;
+		if (mid * mid == input)
+		{
+			return mid;
+		}
+		else if (mid * mid > input)
+		{
+			high = mid - 1;
+		}
+		else
+		{
+			low = mid + 1;
+			res = mid;
+		}
+	}
+	return res;
 }
 
 // When subtracting from a size_t, u have to be careful.

@@ -7,10 +7,13 @@ c:\users\valentine oradiegwu\documents\visual studio 2015\projects\random\random
 c:\users\valentine oradiegwu\documents\visual studio 2015\projects\random\random\functions.cpp(168): warning C4018: '<': signed/unsigned mismatch
 c:\users\valentine oradiegwu\documents\visual studio 2015\projects\random\random\functions.cpp(177): warning C4018: '<': signed/unsigned mismatch
 c:\users\valentine oradiegwu\documents\visual studio 2015\projects\random\random\functions.cpp(179): warning C4018: '<': signed/unsigned mismatch
-c:\users\valentine oradiegwu\documents\visual studio 2015\projects\random\random\functions.cpp(201): warning C4018: '<': signed/unsigned mismatch
-c:\users\valentine oradiegwu\documents\visual studio 2015\projects\random\random\functions.cpp(267): warning C4018: '<': signed/unsigned mismatch
-c:\users\valentine oradiegwu\documents\visual studio 2015\projects\random\random\functions.cpp(352): warning C4554: '&': check operator precedence for possible error; use parentheses to clarify precedence
-c:\users\valentine oradiegwu\documents\visual studio 2015\projects\random\random\functions.cpp(659): warning C4018: '>': signed/unsigned mismatch
+c:\users\valentine oradiegwu\documents\visual studio 2015\projects\random\random\functions.cpp(203): warning C4018: '<': signed/unsigned mismatch
+c:\users\valentine oradiegwu\documents\visual studio 2015\projects\random\random\functions.cpp(231): warning C4018: '<': signed/unsigned mismatch
+c:\users\valentine oradiegwu\documents\visual studio 2015\projects\random\random\functions.cpp(297): warning C4018: '<': signed/unsigned mismatch
+c:\users\valentine oradiegwu\documents\visual studio 2015\projects\random\random\functions.cpp(551): warning C4018: '<': signed/unsigned mismatch
+c:\users\valentine oradiegwu\documents\visual studio 2015\projects\random\random\functions.cpp(891): warning C4018: '<': signed/unsigned mismatch
+  Main.cpp
+  Generating Code...
   Random.vcxproj -> C:\Users\Valentine Oradiegwu\documents\visual studio 2015\Projects\Random\Debug\Random.exe
   Random.vcxproj -> C:\Users\Valentine Oradiegwu\documents\visual studio 2015\Projects\Random\Debug\Random.pdb (Partial PDB)
           1 file(s) copied.

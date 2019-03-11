@@ -13,7 +13,6 @@ int LeetAtoi(const std::string& input);
 bool LeetIsPalindrome(int x);
 int LeetLongestSubstring(const std::string& s);
 std::vector<std::vector<int> > LeetThreeSum(std::vector<int>& nums);
-std::vector<std::vector<int> > LeetThreeSum2(std::vector<int>& nums);
 int LeetsubarraySum(std::vector<int>& nums, int k);
 int LeetMaximumSubarraySum(std::vector<int>& nums, int k);
 void PrintDistinctNumbersWithPairs(std::vector<int>& nums);
@@ -25,16 +24,28 @@ bool unique_chars2(const char* input);
 void remove_dupes(char* input);
 void remove_dupes2(char* input);
 void remove_dupes3(char* input);
+void reverse(char* input, char* end);
+void reverseWords(char* input);
 std::string MergeStrings(const std::vector<std::string>& iInput);
+bool IsSentenceInString(const std::string& ransom, const std::string& dictionary);
+bool IsSentenceInString2(const std::string& ransom, const std::string& dictionary);
 void setZeros(int matrix[][4]);
 int myStrCmp(const char* input1, const char* input2);
 bool are_anagrams(const char* input1, const char* input2);
+bool are_anagrams2(const std::string& one, const std::string& two);
+std::vector<std::vector<std::string>> Anagrams(const std::vector<std::string>& dictionary);
 std::string replaceSpaceWithEncoding(char* input);
+int BinSearchArray(int input[], int length, int key);
+std::pair<int, int> FindLargestIncreasingSubSequence(const std::vector<int>& input);
 bool is_substr(const char* input1, const char* input2);
 int UtopianTree(int cycles);
 int myAtoi(std::string str);
 int fib(int n);
 size_t CountBitsInInt(int input);
+int squareRoot(int input);
+int squareRoot2(int input);
+int binSearchFirstOccurence(const std::vector<int>& input, int key);
+int BinFindFirstLargerThanK(const std::vector<int>& input, int key);
 std::string multiplyStrings(const std::string& first, const std::string& second);
 template <typename T>
 void dbg(const std::string& annotation, const T& item)
@@ -51,26 +62,47 @@ void printAll(const CONT& container)
 	}
 }
 
+/*template <typename CONT>
+std::ostream& operator<<(std::ostream& os, const CONT& container)
+{
+	auto sep = " ";
+	os << "[";
+	for (auto item : container)
+	{
+		os << sep << item;
+		sep = " ;"
+	}
+	os << "]";
+	return os;
+}*/
+
+template<typename T1, typename T2>
+std::ostream& operator<< (std::ostream& os, const std::pair<T1, T2>& pair)
+{
+	os << "First = " << pair.first << " . Second = " << pair.second;
+	return os;
+}
+
 template <typename T>
 std::string getType(const T&);
 
 template <typename T>
-T max(const std::vector<T>& input)
+T secondMax(const std::vector<T>& input)
 {
 	if input.empty()
 		throw std::invalid_argument{ "The input must have at least one value" };
 	T max = input[0];
 	T secondmax = input[0];
-	for (int i = 1; i < input.size(); ++i)
+	for (auto i : input)
 	{
-		if (input[i] > max)
+		if (i > max)
 		{
 			secondmax = max;
-			max = input[i];
+			max = i;
 		}
-		else if (input[i] > secondmax)
+		else if (i > secondmax)
 		{
-			secondmax = input[i];
+			secondmax = i;
 		}
 	}
 	return secondmax;
@@ -202,6 +234,7 @@ void InsertionSort(Iter begin, Iter end)
 	{
 		auto current = start;
 		auto prev = current - 1;
+		//while (current > begin && *current < *prev) same effect as below.
 		while (prev >= begin && *current < *prev)
 		{
 			std::swap(*current, *prev);

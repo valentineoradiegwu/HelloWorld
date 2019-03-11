@@ -150,7 +150,8 @@ int main()
 	char test4[] = "aabccde";
 	remove_dupes3(test4);
 	std::cout << "Unique = " << test4 << std::endl;
-	std::cout << "Are Anagrams?  " << are_anagrams("listen", "silent") << std::endl;
+	std::cout << "Are Anagrams?  " << are_anagrams2("listen", "silent") << std::endl;
+	Anagrams(std::vector<std::string>{"algorithm", "god", "logarithm", "dog"});
 	//std::cout << "Result  " << myStrCmp("", "abc") << std::endl;
 	//std::cout << "Result  " << myStrCmp("abc", "") << std::endl;
 	//std::cout << "Result  " << myStrCmp("abcd", "abc") << std::endl;
@@ -158,7 +159,7 @@ int main()
 	std::cout << "Result  " << myStrCmp("abc", "abc") << std::endl;
 	//std::cout << "Result  " << myStrCmp("abc", "def") << std::endl;
 	//std::cout << "Result  " << myStrCmp("def", "abc") << std::endl;
-	std::cout << "IsSub =  " << is_substr("vale", "valfvalg") << std::endl;
+	std::cout << "IsSub =  " << is_substr("boomboomd", "boomboomboomd") << std::endl;
 	std::cout << "Height = " << UtopianTree(4) << std::endl;
 
 	{
@@ -295,6 +296,14 @@ int main()
 	std::vector<int> input{ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25 };
 	std::cout << "res = " << ParallelAccumulate(input, 0) << std::endl;
 	ThreadSafeList<int> stack{};
+
+	std::cout << FindLargestIncreasingSubSequence(std::vector<int>{1, 2, 3, 2, 4, 6, 8}) << std::endl;
+
+	squareRoot2(17);
+	std::cout << "First Occurence in bin search = " << binSearchFirstOccurence(std::vector<int>{-5, 1, 1, 1, 1, 6, 8, 9}, 1) << std::endl;
+	std::cout << "First Occurence in bin search = " << binSearchFirstOccurence(std::vector<int>{-5, 1, 1, 1, 1, 6, 8, 9}, 10) << std::endl;
+	std::cout << "First Occurence in bin search = " << binSearchFirstOccurence(std::vector<int>{-5, 1, 1, 1, 1, 6, 8, 9}, -6) << std::endl;
+	std::cout << "First Occurence in bin search = " << binSearchFirstOccurence(std::vector<int>{1, 1, 1, 1, 6, 8, 9}, 1) << std::endl;
 
 	std::cout << "Number of set bits = " << CountBitsInInt(7) << std::endl;
 	std::cout << "Multiply = " << multiplyStrings("999", "999") << std::endl;
