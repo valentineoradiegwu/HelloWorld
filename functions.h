@@ -3,6 +3,7 @@
 #include <iostream>
 #include <stdexcept>      // std::invalid_argument
 #include <iterator>
+#include <stack>
 
 std::vector<int> LeetTwoSum(const std::vector<int>& numbers, int target);
 std::vector<int> LeetTwoSum2(const std::vector<int>& numbers, int target);
@@ -47,6 +48,52 @@ int squareRoot2(int input);
 int binSearchFirstOccurence(const std::vector<int>& input, int key);
 int BinFindFirstLargerThanK(const std::vector<int>& input, int key);
 std::string multiplyStrings(const std::string& first, const std::string& second);
+
+/*
+You are designing a compiler for a C++ program and need to check that braces in any file are balanced.
+Braces in a string are considered balanced if the following criteria are met.
+1. All braces must be close. Braces come in pairs of the form {}, () and []. The left brace opens the pair the right one closes it.
+2. In any set of nested braces, the braces between any pair must be closed.
+For example, [{}] is valid but [}]{} is not.
+
+Note that each string is composed entirely of '{' , '}' , '(' , ')' , '[' and ']'.
+
+Function Description:
+Complete the fuction braces in the editor below. The function must return an array of strings where the string at each index denotes
+whether the braces were balanced in the corresponding index of the input. Return a YES for balanced and NO for not balanced
+*/
+std::vector<std::string> braces(std::vector<std::string>& input);
+bool is_balanced(const std::string& word);
+
+/*
+You just got a new job where you have to work exactly as many hours as you are told each week. Some of the days, they tell you how many
+hours you will work. You get to choose the remainder of your schedule within the limits.
+
+A completed schedule consist of exactly 7 digits in the range 0 to 8 representing each day's hours to be worked. You will get a pattern 
+string for the scheule, but with some of the replaced by a question mark, ?, (ascii 63 decimal). Given a maximum number of hours you can work in a day, 
+replace the question marks with digits so that the sum of the scheduled hours is exactly the hours you must work in a week. Return a string array
+with all possible schedules you can create, ordered lexicographically.
+
+For example, your partial schedule pattern = 08??840, your required hours, work_hours = 24, and you can only work at most, day_hours =4 hours
+per dayduring the 2 days in question. You have two days on which you must work 24 - 20 = 4 more hours for the week. All of your possible schedules are listed below;
+
+0804840
+0813840
+0822840
+0831840
+0840840
+
+Function Description: 
+Complete the function findSchedules in the editor below. The function must return an array of strings that represents all the possible valid schedules. The strings 
+must be ordered lexicographically
+
+findSchedules has the follownf parameters;
+work_hours: an integer that represents the hours you must work in the week.
+day_hours: an onteger that represents the maximum hours you may work in a day.
+patter: a string that represents the partially completed schedule.
+*/
+
+std::vector<std::string> findSchedules(int work_hours, int day_hours, std::string& pattern);
 template <typename T>
 void dbg(const std::string& annotation, const T& item)
 {
@@ -243,7 +290,7 @@ void InsertionSort(Iter begin, Iter end)
 }
 
 template <typename T>
-void InsertSort(std::vector<T>& input)
+void InsertionSort(std::vector<T>& input)
 {
 	for (auto i = 0; i < input.size(); ++i)
 	{

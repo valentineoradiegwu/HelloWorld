@@ -585,6 +585,49 @@ std::vector<std::vector<std::string>> Anagrams(const std::vector<std::string>& d
 	return res;
 }
 
+std::vector<std::string> braces(std::vector<std::string>& input)
+{
+	const auto len = input.size();
+	std::vector<std::string> result(len, "NO");
+	for (auto i = 0; i < len; ++i)
+		if (is_balanced(input[i]))
+			result[i] = "YES";
+	return result;
+}
+
+bool is_balanced(const std::string& word)
+{
+	std::stack<char> stk{};
+	for (char bracket : word)
+	{
+		switch (bracket)
+		{
+		case '{': stk.push('}'); break;
+		case '[': stk.push(']'); break;
+		case '(': stk.push(')'); break;
+		default: 
+			if (stk.empty() || stk.top() != bracket) { return false; }
+			stk.pop();
+		}
+	}
+	return stk.empty();
+}
+
+std::vector<std::string> findSchedules(int work_hours, int day_hours, std::string& pattern)
+{
+	int no_of_hours_in_pattern = 0;
+	std::vector<int> index_with_question_marks{};
+	for (int i = 0; i < pattern.size(); ++i)
+	{
+		if (pattern[i] == '?')
+			index_with_question_marks.push_back(i);
+		else
+			no_of_hours_in_pattern += pattern[i] - '0';
+	}
+	std::vector<std::string> res{};
+	return res;
+}
+
 std::string replaceSpaceWithEncoding(char* input)
 {
 	int spaceCount = 0;
