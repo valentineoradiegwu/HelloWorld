@@ -10,6 +10,7 @@
 #include <boost/foreach.hpp>
 #include <sstream>
 #include <memory>
+#include <functional>
 
 std::vector<int> LeetTwoSum(const std::vector<int>& numbers, int target)
 {
@@ -613,18 +614,77 @@ bool is_balanced(const std::string& word)
 	return stk.empty();
 }
 
-std::vector<std::string> findSchedules(int work_hours, int day_hours, std::string& pattern)
+/*
+pattern = 08??840
+0804840
+0813840
+0822840
+0831840
+0840840
+*/
+
+std::vector<std::vector<int>> Permutations(int hrs_outstanding, int day_hours, std::vector<int> index_for_missing_days)
 {
-	int no_of_hours_in_pattern = 0;
-	std::vector<int> index_with_question_marks{};
+	int missing_days = index_for_missing_days.size();
+	//Generate permutations from 0 to day_hours of size missing_days
+	std::vector<int> range(day_hours + 1);
+	for (int i = 0; i < range.size(); ++i)
+		range[i] = i;
+	std::vector<std::vector<int>> permutations{};
+
+	//Some high school permutation computations. I had to look this up on the internet
+	//as its being quite a while I did it last.
+	int no_of_permutations = std::pow(range.size(), index_for_missing_days.size());
+
+	for (int i = 0; i < no_of_permutations; ++i)
+	{
+		std::vector<int> permutation{};
+		for (int j = 0; j < index_for_missing_days.size(); ++j)
+		{
+			int selector = static_cast<int>(i / std::pow(range.size(), j)) % range.size();
+			permutation.push_back(range[selector]);
+		}
+		permutations.push_back(std::move(permutation));
+	}
+
+	//Filter off permutations which do not tally up to the outstanding hours.
+	permutations.erase(std::remove_if(permutations.begin(),
+		permutations.end(),
+		[hrs_outstanding](const std::vector<int>& x) {return std::accumulate(x.begin(), x.end(), 0) != hrs_outstanding; }), permutations.end());
+	return permutations;
+}
+
+std::vector<std::string> findSchedules(int work_hours, int day_hours, const std::string& pattern)
+{
+	int total_hours_in_pattern = 0;
+	std::vector<int> index_for_missing_days{};
 	for (int i = 0; i < pattern.size(); ++i)
 	{
 		if (pattern[i] == '?')
-			index_with_question_marks.push_back(i);
+			index_for_missing_days.push_back(i);
 		else
-			no_of_hours_in_pattern += pattern[i] - '0';
+			total_hours_in_pattern += pattern[i] - '0';
 	}
+
+	int hrs_outstanding = work_hours - total_hours_in_pattern;
+	auto permutations = Permutations(hrs_outstanding, day_hours, index_for_missing_days);
 	std::vector<std::string> res{};
+
+	//We need to interpolate the hrs from the permutation into the ? in schedule
+	//We know the indexes where the ? are in the schedule since we stored them in index_for_missing_days
+	for (const auto & permutation : permutations)
+	{
+		std::string schedule{ pattern };
+		for (int i = 0; i < permutation.size(); ++i)
+		{
+			int time = permutation[i];
+			schedule[index_for_missing_days[i]] = '0' + time;
+		}
+		res.push_back(schedule);
+	}
+	//Is there a way to ensure the algo in Permutations guarantees its results in sorted order
+	//and therefore make the nlogn sort unnecessary?
+	std::sort(res.begin(), res.end());
 	return res;
 }
 

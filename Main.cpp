@@ -308,6 +308,9 @@ int main()
 	std::cout << "Number of set bits = " << CountBitsInInt(7) << std::endl;
 	std::cout << "Multiply = " << multiplyStrings("999", "999") << std::endl;
 
+	//findSchedules(56, 8, "???8???");
+	findSchedules(24, 4, "08??840");
+
 	auto server = std::thread{ Rep_Server{} };
 	auto client = std::thread{ Rep_Client{} };
 	server.detach();

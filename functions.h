@@ -4,6 +4,8 @@
 #include <stdexcept>      // std::invalid_argument
 #include <iterator>
 #include <stack>
+#include <functional>
+#include <numeric>
 
 std::vector<int> LeetTwoSum(const std::vector<int>& numbers, int target);
 std::vector<int> LeetTwoSum2(const std::vector<int>& numbers, int target);
@@ -87,13 +89,13 @@ Function Description:
 Complete the function findSchedules in the editor below. The function must return an array of strings that represents all the possible valid schedules. The strings 
 must be ordered lexicographically
 
-findSchedules has the follownf parameters;
+findSchedules has the following parameters;
 work_hours: an integer that represents the hours you must work in the week.
 day_hours: an onteger that represents the maximum hours you may work in a day.
 patter: a string that represents the partially completed schedule.
 */
 
-std::vector<std::string> findSchedules(int work_hours, int day_hours, std::string& pattern);
+std::vector<std::string> findSchedules(int work_hours, int day_hours, const std::string& pattern);
 template <typename T>
 void dbg(const std::string& annotation, const T& item)
 {
