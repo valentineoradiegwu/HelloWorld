@@ -613,6 +613,34 @@ bool is_balanced(const std::string& word)
 	}
 	return stk.empty();
 }
+//if i am terminating brace then 
+// If stack is empty return false
+// if top of stack is not me return false
+// else continue to next char.
+bool is_balanced_can_contain_nonbraces(const std::string& word)
+{
+	std::stack<char> stk{};
+	auto is_terminating_brace = [](char c) {return c == '}' || c == ']' || c == ')'; };
+	for (char eachChar : word)
+	{
+		switch (eachChar)
+		{
+		case '{': stk.push('}'); break;
+		case '[': stk.push(']'); break;
+		case '(': stk.push(')'); break;
+		default:
+			if (is_terminating_brace(eachChar))
+			{
+				if (stk.empty() || stk.top() != eachChar)
+				{
+					return false;
+				}
+				stk.pop();
+			}
+		}
+	}
+	return stk.empty();
+}
 
 /*
 pattern = 08??840

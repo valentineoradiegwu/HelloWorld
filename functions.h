@@ -66,7 +66,7 @@ whether the braces were balanced in the corresponding index of the input. Return
 */
 std::vector<std::string> braces(std::vector<std::string>& input);
 bool is_balanced(const std::string& word);
-
+bool is_balanced_can_contain_nonbraces(const std::string& word);
 /*
 You just got a new job where you have to work exactly as many hours as you are told each week. Some of the days, they tell you how many
 hours you will work. You get to choose the remainder of your schedule within the limits.
