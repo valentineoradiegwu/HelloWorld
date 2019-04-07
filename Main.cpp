@@ -19,6 +19,7 @@
 #include <iterator>
 #include "ParallelAccumulate.h"
 #include "ThreadSafeList.h"
+#include "ThreadSafeQueue.h"
 #include "rep_client.h"
 #include "rep_server.h"
 
@@ -313,6 +314,8 @@ int main()
 
 	//findSchedules(56, 8, "???8???");
 	findSchedules(24, 4, "08??840");
+	const char bla[] = {"Val"};
+	auto change = coinChange(std::vector<int>{ 25, 10, 5 }, 30);
 
 	auto server = std::thread{ Rep_Server{} };
 	auto client = std::thread{ Rep_Client{} };

@@ -586,7 +586,7 @@ std::vector<std::vector<std::string>> Anagrams(const std::vector<std::string>& d
 	return res;
 }
 
-std::vector<std::string> braces(std::vector<std::string>& input)
+std::vector<std::string> braces(const std::vector<std::string>& input)
 {
 	const auto len = input.size();
 	std::vector<std::string> result(len, "NO");
@@ -714,6 +714,27 @@ std::vector<std::string> findSchedules(int work_hours, int day_hours, const std:
 	//and therefore make the nlogn sort unnecessary?
 	std::sort(res.begin(), res.end());
 	return res;
+}
+
+std::map<int, int> coinChange(std::vector<int>& denominations, int amount)
+{
+	std::map<int, int> res{};
+	int pendingAmount = amount;
+	//The denominations need to be sorted in reverse
+	//This also has to be a set i.e no dupes
+	std::sort(denominations.rbegin(), denominations.rend());
+	for (auto denomination : denominations)
+	{
+		if (denomination > pendingAmount)
+			continue;
+		//multiples is guaranteed to be at least 1 here
+		int multiples = pendingAmount / denomination;
+		res.insert({denomination, multiples});
+		pendingAmount = pendingAmount - (multiples * denomination);
+		if (pendingAmount == 0)
+			return res;
+	}
+	throw std::invalid_argument{"Could not find complete change for the amount " + amount};
 }
 
 std::string replaceSpaceWithEncoding(char* input)

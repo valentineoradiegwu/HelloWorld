@@ -146,11 +146,13 @@
     <ClInclude Include="printtuple.h" />
     <ClInclude Include="produce1consume1.h" />
     <ClInclude Include="producerconsumer.h" />
+    <ClInclude Include="QueueWithStacks.h" />
     <ClInclude Include="rep_client.h" />
     <ClInclude Include="rep_server.h" />
     <ClInclude Include="SetOfStacks.h" />
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="ThreadSafeList.h" />
+    <ClInclude Include="ThreadSafeQueue.h" />
     <ClInclude Include="zmq.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -4,6 +4,7 @@
 #include <stdexcept>      // std::invalid_argument
 #include <iterator>
 #include <stack>
+#include <map>
 #include <functional>
 #include <numeric>
 
@@ -50,6 +51,7 @@ int squareRoot2(int input);
 int binSearchFirstOccurence(const std::vector<int>& input, int key);
 int BinFindFirstLargerThanK(const std::vector<int>& input, int key);
 std::string multiplyStrings(const std::string& first, const std::string& second);
+std::map<int, int> coinChange(std::vector<int>& denominations, int amount);
 
 /*
 You are designing a compiler for a C++ program and need to check that braces in any file are balanced.
@@ -64,7 +66,7 @@ Function Description:
 Complete the fuction braces in the editor below. The function must return an array of strings where the string at each index denotes
 whether the braces were balanced in the corresponding index of the input. Return a YES for balanced and NO for not balanced
 */
-std::vector<std::string> braces(std::vector<std::string>& input);
+std::vector<std::string> braces(const std::vector<std::string>& input);
 bool is_balanced(const std::string& word);
 bool is_balanced_can_contain_nonbraces(const std::string& word);
 /*
