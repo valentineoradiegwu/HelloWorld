@@ -1,6 +1,7 @@
 #include "functions.h"
 #include <map>
 #include <unordered_map>
+#include <unordered_set>
 #include <set>
 #include <limits.h>
 #include <algorithm>
@@ -145,6 +146,68 @@ int LeetLongestSubstring(const std::string& s)
 		}
 	}
 	return max;
+}
+
+int FindMaxLengthValidParenthesis(const std::string& input)
+{
+	std::stack<int> stk{};
+	stk.push(-1);
+	int res = 0;
+	for (int i = 0; i < input.size(); ++i)
+	{
+		if (input[i] == '(')
+			stk.push(i);
+		else
+		{
+			stk.pop();
+			if (!stk.empty())
+				res = std::max(res, i - stk.top());
+			else
+				stk.push(i);
+		}
+	}
+	return res;
+}
+
+int firstRepeatingInteger(const std::vector<int>& input)
+{
+	std::unordered_set<int> unique{};
+	for (auto i : input)
+	{
+		auto result = unique.insert(i);
+		if (!result.second)
+			return i;
+	}
+	assert(false);
+}
+
+/*
+1. To rotate an array by an offset, you want to start from the offset and wrap around
+2. You probably want to add an optimization. If the offset to rotate by a multiple of the size,
+   just bail out.
+*/
+std::vector<int> rotateArray(const std::vector<int>& input, int step) {
+	if (step % input.size() == 0)
+		return input;
+
+	std::vector<int> ret;
+	ret.reserve(input.size());
+
+	for (int i = 0; i < input.size(); i++) 
+		ret.push_back(input[(i + step) % input.size()]);
+	return ret;
+}
+
+//What will be your base case bruv?
+int searchNumOccurrenceR(const std::vector<int>& input, int k, int start, int end)
+{
+	if (start > end) return 0;
+
+	int mid = start + (end - start) / 2;
+
+	if (input[mid] < k) return searchNumOccurrenceR(input, k, mid + 1, end);
+	else if (input[mid] > k) return searchNumOccurrenceR(input, k, start, mid - 1);
+	else return searchNumOccurrenceR(input, k, start, mid - 1) + 1 + searchNumOccurrenceR(input, k, mid + 1, end);
 }
 
 //{ -1, 0, 1, 2, -1, -4 }

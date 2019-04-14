@@ -297,7 +297,7 @@ int main()
 	std::vector<int> input{ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25 };
 	std::cout << "res = " << ParallelAccumulate(input, 0) << std::endl;
 	ThreadSafeList<int> stack{};
-
+	FindMaxLengthValidParenthesis("()()()(((()");
 	std::cout << FindLargestIncreasingSubSequence(std::vector<int>{1, 2, 3, 2, 4, 6, 8}) << std::endl;
 	std::cout << "Is balanced = " << is_balanced_can_contain_nonbraces("jfkfkfk}ui") << std::endl;
 	std::cout << "Is balanced = " << is_balanced_can_contain_nonbraces("ryriir{uri[fjjfk]rir}") << std::endl;
@@ -308,9 +308,13 @@ int main()
 	std::cout << "First Occurence in bin search = " << binSearchFirstOccurence(std::vector<int>{-5, 1, 1, 1, 1, 6, 8, 9}, 10) << std::endl;
 	std::cout << "First Occurence in bin search = " << binSearchFirstOccurence(std::vector<int>{-5, 1, 1, 1, 1, 6, 8, 9}, -6) << std::endl;
 	std::cout << "First Occurence in bin search = " << binSearchFirstOccurence(std::vector<int>{1, 1, 1, 1, 6, 8, 9}, 1) << std::endl;
+	std::cout << "Number of occurences = " << searchNumOccurrenceR(std::vector<int>{1, 2, 3, 3, 3, 4, 5, 8}, 3, 0, 7) << std::endl;
 
 	std::cout << "Number of set bits = " << CountBitsInInt(7) << std::endl;
 	std::cout << "Multiply = " << multiplyStrings("999", "999") << std::endl;
+
+	auto rot1 = rotateArray(std::vector<int>{1, 2, 3, 4, 5}, 1);
+	auto rot2 = rotateArray(std::vector<int>{1, 2, 3, 4, 5}, 5);
 
 	//findSchedules(56, 8, "???8???");
 	findSchedules(24, 4, "08??840");

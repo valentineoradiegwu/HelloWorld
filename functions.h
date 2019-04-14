@@ -52,7 +52,10 @@ int binSearchFirstOccurence(const std::vector<int>& input, int key);
 int BinFindFirstLargerThanK(const std::vector<int>& input, int key);
 std::string multiplyStrings(const std::string& first, const std::string& second);
 std::map<int, int> coinChange(std::vector<int>& denominations, int amount);
-
+int FindMaxLengthValidParenthesis(const std::string& input);
+int firstRepeatingInteger(const std::vector<int>& input);
+int searchNumOccurrenceR(const std::vector<int>& input, int k, int start, int end);
+std::vector<int> rotateArray(const std::vector<int>& input, int step);
 /*
 You are designing a compiler for a C++ program and need to check that braces in any file are balanced.
 Braces in a string are considered balanced if the following criteria are met.
