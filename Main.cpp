@@ -320,6 +320,11 @@ int main()
 	findSchedules(24, 4, "08??840");
 	const char bla[] = {"Val"};
 	auto change = coinChange(std::vector<int>{ 25, 10, 5 }, 30);
+	std::vector<int> testNumber{ 9, 9, 9 };
+	addOneToVector(testNumber);
+
+	std::vector<int> testNumber1{ 9, 9, 8 };
+	addOneToVector(testNumber1);
 
 	auto server = std::thread{ Rep_Server{} };
 	auto client = std::thread{ Rep_Client{} };

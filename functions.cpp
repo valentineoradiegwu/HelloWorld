@@ -210,6 +210,66 @@ int searchNumOccurrenceR(const std::vector<int>& input, int k, int start, int en
 	else return searchNumOccurrenceR(input, k, start, mid - 1) + 1 + searchNumOccurrenceR(input, k, mid + 1, end);
 }
 
+//In place?
+//An optimisation would be to check the last value. if it is less than than 9
+//add 1 to it and return.
+void addOneToVector(std::vector<int>& input)
+{
+	if (input.empty())
+		return;
+
+	auto nonZero = input.begin();
+	for (auto i = input.begin(); i != input.end(); ++i)
+	{
+		if (*i != 0)
+		{
+			nonZero = i;
+			break;
+		}
+	}
+
+	if (nonZero != input.begin())
+		input.erase(input.begin(), nonZero);
+
+	int carry = 0;
+	int add = 1;
+
+	auto last = input.rbegin();
+	if (*last < 9)
+	{
+		*last += add;
+		return;
+	}
+
+	for (auto i = input.rbegin(); i != input.rend(); ++i)
+	{
+		int sum = *i + add + carry;
+		carry = sum / 10;
+		*i = sum % 10;
+		add = 0;
+	}
+	if (carry)
+		input.insert(input.begin(), carry);
+	return;
+}
+
+int coverPoints(const std::vector<int>& A, const std::vector<int>& B) {
+	int count = 0;
+	if (A.empty() || B.empty())
+		return count;
+	int currX = A[0];
+	int currY = B[0];
+	for (int i = 1; i < A.size(); ++i)
+	{
+		int nextX = A[i];
+		int nextY = B[i];
+		count += std::max(std::abs(nextX - currX), std::abs(nextY - currY));
+		currX = nextX;
+		currY = nextY;
+	}
+	return count;
+}
+
 //{ -1, 0, 1, 2, -1, -4 }
 std::vector<std::vector<int> > LeetThreeSum(std::vector<int>& nums)
 {

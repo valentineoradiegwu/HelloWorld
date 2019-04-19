@@ -56,6 +56,8 @@ int FindMaxLengthValidParenthesis(const std::string& input);
 int firstRepeatingInteger(const std::vector<int>& input);
 int searchNumOccurrenceR(const std::vector<int>& input, int k, int start, int end);
 std::vector<int> rotateArray(const std::vector<int>& input, int step);
+void addOneToVector(std::vector<int>& input);
+int coverPoints(const std::vector<int>& A, const std::vector<int>& B);
 /*
 You are designing a compiler for a C++ program and need to check that braces in any file are balanced.
 Braces in a string are considered balanced if the following criteria are met.
