@@ -1254,6 +1254,55 @@ std::string multiplyStrings(const std::string& first, const std::string& second)
 	return "0";
 }
 
+/*
+Sum(Natural numbers) = Sum(given numbers) - A + B
+Sum_squares(Natural numbers) = Sum_squares(given numbers) - A*A + B*B
+where :
+
+Sum of n Natural numbers is given by : n(n+1)/2
+PROOF:
+The sum can be represented in 2 ways
+sum = 1 + 2 + 3 + ...+ (n -2) + (n - 1) + (n)
+sum = n + (n-1) + (n -2) + ... + 3 + 2 + 1
+Adding these 2, we have
+2sum = (n + 1) + (n + 1) + (n + 1) + ... + (n + 1) + (n + 1) + (n + 1)
+2sum = n(n + 1)
+sum = n(n + 1) / 2
+Sum of squares of n Natural numbers is given by : n((n+1)/2)((2n+1)/3)
+Also note that B^2 - A^2 = (B-A) * (B+A)
+*/
+
+std::vector<int> repeatedAndDuplicateNumber(const std::vector<int>& input)
+{
+	std::vector<int> res(2);
+	if (input.empty())
+		return res;
+
+	int missing_num = 0;
+	int repeated_num = 0;
+	long x = input.size();
+	long sum_of_num = 0;
+	long sum_of_squares = 0;
+	long sum_of_num_actual = (x*(x + 1)) / 2;
+	long sum_of_squares_actual = ((x)*(x + 1)*(2 * x + 1)) / 6;
+
+	for (long elem : input)
+	{
+		sum_of_num += elem;
+		sum_of_squares += elem*elem;
+	}
+
+	missing_num = (((sum_of_squares_actual - sum_of_squares) / (sum_of_num_actual - sum_of_num))
+		+ (sum_of_num_actual - sum_of_num)) / 2;
+	repeated_num = (((sum_of_squares_actual - sum_of_squares) / (sum_of_num_actual - sum_of_num))
+		- (sum_of_num_actual - sum_of_num)) / 2;
+
+	res[0] = repeated_num;
+	res[1] = missing_num;
+
+	return res;
+}
+
 template <typename T>
 std::string getType(const T& arg)
 {
