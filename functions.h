@@ -59,6 +59,9 @@ std::vector<int> rotateArray(const std::vector<int>& input, int step);
 void addOneToVector(std::vector<int>& input);
 int coverPoints(const std::vector<int>& A, const std::vector<int>& B);
 std::vector<int> repeatedAndDuplicateNumber(const std::vector<int>& input);
+std::vector<std::pair<int, int>> mergeInterval(std::vector<std::pair<int, int>>& intervals);
+std::vector<std::pair<int, int>> insertAndMergeInterval(std::vector<std::pair<int, int>>& intervals, std::pair<int, int> newInterval);
+std::vector<std::pair<int, int>> insertAndMergeInterval2(std::vector<std::pair<int, int>>& intervals, std::pair<int, int> newInterval);
 /*
 You are designing a compiler for a C++ program and need to check that braces in any file are balanced.
 Braces in a string are considered balanced if the following criteria are met.

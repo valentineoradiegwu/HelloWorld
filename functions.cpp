@@ -1303,6 +1303,103 @@ std::vector<int> repeatedAndDuplicateNumber(const std::vector<int>& input)
 	return res;
 }
 
+std::vector<std::pair<int, int>> mergeInterval(std::vector<std::pair<int, int>>& intervals)
+{
+	std::vector<std::pair<int, int>> res{};
+	if (intervals.empty())
+		return res;
+	std::sort(intervals.begin(), intervals.end());
+	res.push_back(intervals.front());
+	for (int i = 1; i < intervals.size(); ++i)
+	{
+		auto& curr_interval = intervals[i];
+		auto& prev_interval = res.back();
+		auto are_consecutive_intervals_overlapping = curr_interval.first <= prev_interval.second;
+		if (are_consecutive_intervals_overlapping)
+		{
+			prev_interval.second = std::max(prev_interval.second, curr_interval.second);
+		}
+		else
+		{
+			res.push_back(curr_interval);
+		}
+	}
+	return res;
+}
+
+//Already sorted and non-overlapping
+std::vector<std::pair<int, int>> insertAndMergeInterval(std::vector<std::pair<int, int>>& intervals, std::pair<int, int> newInterval)
+{
+	std::vector<std::pair<int, int>> res{};
+	if (intervals.empty())
+	{
+		res.push_back(newInterval);
+		return res;
+	}
+	auto newInserted = false;
+	int start = 1;
+	auto use_new_interval = !newInserted && newInterval.first < intervals[0].first;
+
+	//could be first or newInterval
+	if (use_new_interval)
+	{
+		start = 0;
+		res.push_back(newInterval);
+		newInserted = true;
+	}
+	else
+		res.push_back(intervals.front());
+
+	for (int i = start; i < intervals.size(); ++i)
+	{
+		//curr could be i or newInterval
+		use_new_interval = !newInserted && newInterval.first < intervals[i].first;
+		auto& curr_interval = use_new_interval ? newInterval : intervals[i];
+		auto& prev_interval = res.back();
+		auto are_consecutive_intervals_overlapping = curr_interval.first < prev_interval.second;
+		if (are_consecutive_intervals_overlapping)
+			prev_interval.second = std::max(prev_interval.second, curr_interval.second);
+		else
+			res.push_back(curr_interval);
+
+		if (use_new_interval)
+		{
+			newInserted = true;
+			--i;
+		}
+		if (!newInserted && ((i + 1) == intervals.size()))
+		{
+			intervals.push_back(newInterval);
+			newInserted = true;
+		}
+	}
+	return res;
+}
+
+std::vector<std::pair<int, int>> insertAndMergeInterval2(std::vector<std::pair<int, int>>& intervals, std::pair<int, int> newInterval)
+{
+	std::vector<std::pair<int, int>> res{};
+
+	for (auto& interval : intervals)
+	{
+		if (interval.second < newInterval.first)
+			res.push_back(interval);
+		else if (newInterval.second < interval.first)
+		{
+			res.push_back(newInterval);
+			newInterval = interval;
+		}
+		else
+		{
+			auto start = std::min(newInterval.first, interval.first);
+			auto end = std::max(newInterval.second, interval.second);
+			newInterval = {start, end};
+		}
+	}
+	res.push_back(newInterval);
+	return res;
+}
+
 template <typename T>
 std::string getType(const T& arg)
 {

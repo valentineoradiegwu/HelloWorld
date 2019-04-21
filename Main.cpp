@@ -325,6 +325,11 @@ int main()
 
 	std::vector<int> testNumber1{ 9, 9, 8 };
 	addOneToVector(testNumber1);
+	mergeInterval(std::vector<std::pair<int, int>>{ {6, 8}, { 1,9 }, { 2,4 }, { 4,7 } });
+	//insertAndMergeInterval(std::vector<std::pair<int, int>>{ {1, 3}, { 6,9 } }, {2, 5});
+	//insertAndMergeInterval(std::vector<std::pair<int, int>>{ {1, 2}, { 3,5 }, { 6,7 }, { 8,10 }, { 12,16 } }, { 4, 9 });
+	//insertAndMergeInterval(std::vector<std::pair<int, int>>{ {4, 5}, { 6, 9 } }, { 2, 3 });
+	insertAndMergeInterval2(std::vector<std::pair<int, int>>{ {4, 5}, { 6, 15 } }, { 10, 13 });
 
 	auto server = std::thread{ Rep_Server{} };
 	auto client = std::thread{ Rep_Client{} };

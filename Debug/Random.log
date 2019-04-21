@@ -21,11 +21,11 @@ c:\users\valentine oradiegwu\documents\visual studio 2015\projects\random\random
 c:\users\valentine oradiegwu\documents\visual studio 2015\projects\random\random\functions.cpp(812): warning C4018: '<': signed/unsigned mismatch
 c:\users\valentine oradiegwu\documents\visual studio 2015\projects\random\random\functions.cpp(829): warning C4018: '<': signed/unsigned mismatch
 c:\users\valentine oradiegwu\documents\visual studio 2015\projects\random\random\functions.cpp(1166): warning C4018: '<': signed/unsigned mismatch
-  Generating Code...
-c:\users\valentine oradiegwu\documents\visual studio 2015\projects\random\random\functions.cpp(182): warning C4715: 'firstRepeatingInteger': not all control paths return a value
-  Compiling...
+c:\users\valentine oradiegwu\documents\visual studio 2015\projects\random\random\functions.cpp(1313): warning C4018: '<': signed/unsigned mismatch
+c:\users\valentine oradiegwu\documents\visual studio 2015\projects\random\random\functions.cpp(1353): warning C4018: '<': signed/unsigned mismatch
   Main.cpp
   Generating Code...
+c:\users\valentine oradiegwu\documents\visual studio 2015\projects\random\random\functions.cpp(182): warning C4715: 'firstRepeatingInteger': not all control paths return a value
   Random.vcxproj -> C:\Users\Valentine Oradiegwu\documents\visual studio 2015\Projects\Random\Debug\Random.exe
   Random.vcxproj -> C:\Users\Valentine Oradiegwu\documents\visual studio 2015\Projects\Random\Debug\Random.pdb (Partial PDB)
           1 file(s) copied.
