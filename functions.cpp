@@ -1173,20 +1173,26 @@ int missing_integer(std::vector<int> input)
 
 int fib(int n)
 {
-	if (n <= 1)
+	if (n <= 2)
 		return 1;
 
-	int prev = 0;
-	int current = 1;
-	int fib = 0;
+	int prev = 1;
+	int curr = 1;
 
-	for (int i = 1; i < n; ++i)
+	for (int i = 3; i <= n; ++i)
 	{
-		fib = current + prev;
-		prev = current;
-		current = fib;
+		int tmp = prev + curr;
+		prev = curr;
+		curr = tmp;
 	}
-	return fib;
+	return curr;
+}
+
+int fibr(int n)
+{
+	if (n <= 2)
+		return 1;
+	return fibr(n - 1) + fibr(n - 2);
 }
 
 int squareRoot(int input)
@@ -1398,6 +1404,28 @@ std::vector<std::pair<int, int>> insertAndMergeInterval2(std::vector<std::pair<i
 	}
 	res.push_back(newInterval);
 	return res;
+}
+/*
+Given a read only array of n + 1 integers between 1 and n, find one number that repeats in linear time using less than O(n) space and traversing the stream sequentially O(1) times.
+Find an element which is duplicate without using extra space.
+Here we encode the presence of a duplicate into the array it self.
+If we use the element as index then a duplicate element will touch the same index more than once
+3 4 1 4 1
+*/
+int repeatedNumberModify(std::vector<int>& input)
+{
+	for (auto elem : input)
+	{
+		if (input[abs(elem)] >= 0)
+		{
+			input[abs(elem)] = -input[abs(elem)];
+		}
+		else
+		{
+			return abs(elem);
+		}
+	}
+	return -1;
 }
 
 template <typename T>

@@ -45,6 +45,7 @@ bool is_substr(const char* input1, const char* input2);
 int UtopianTree(int cycles);
 int myAtoi(std::string str);
 int fib(int n);
+int fibr(int n);
 size_t CountBitsInInt(int input);
 int squareRoot(int input);
 int squareRoot2(int input);
@@ -62,6 +63,7 @@ std::vector<int> repeatedAndDuplicateNumber(const std::vector<int>& input);
 std::vector<std::pair<int, int>> mergeInterval(std::vector<std::pair<int, int>>& intervals);
 std::vector<std::pair<int, int>> insertAndMergeInterval(std::vector<std::pair<int, int>>& intervals, std::pair<int, int> newInterval);
 std::vector<std::pair<int, int>> insertAndMergeInterval2(std::vector<std::pair<int, int>>& intervals, std::pair<int, int> newInterval);
+int repeatedNumberModify(std::vector<int>& input);
 /*
 You are designing a compiler for a C++ program and need to check that braces in any file are balanced.
 Braces in a string are considered balanced if the following criteria are met.
