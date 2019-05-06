@@ -107,11 +107,11 @@ int main()
 		std::cout << "Min = " << myTree.findMin() << std::endl;
 		std::cout << "Max = " << myTree.findMax() << std::endl;
 	}
-	
+
 	CustomStack<int> cust_stack;
 	cust_stack.push(1);
 
-	CustomStack<int> cust_stack2{1, 2, 3, 4, 5};
+	CustomStack<int> cust_stack2{ 1, 2, 3, 4, 5 };
 	CustomStack<double> cust_stack3;
 	cust_stack3 = cust_stack2;
 	dbg("cust_stack3 size", cust_stack3.size());
@@ -250,7 +250,7 @@ int main()
 	printAll(numbersToSort3);
 
 	std::cout << "Partition starts " << std::endl;
-	std::vector<int> numbersToPartition{ 7, 2, 1, 6, 8, 5, 3, 4};
+	std::vector<int> numbersToPartition{ 7, 2, 1, 6, 8, 5, 3, 4 };
 	Partition(numbersToPartition.begin(), numbersToPartition.end());
 	printAll(numbersToPartition);
 
@@ -274,7 +274,7 @@ int main()
 	std::cout << MergeStrings(std::vector<std::string>{"valentine", "oradiegwu"}) << std::endl;
 	//std::cout << "Minimum value for int: " << std::numeric_limits<int>::max() << '\n';
 	std::vector<int> out{};
-	std::vector<int> one{0, 2, 3, 4};
+	std::vector<int> one{ 0, 2, 3, 4 };
 	std::vector<int> two{ 1, 2, 3, 5, 6 };
 	intersectTwoSortedRanges(one.begin(), one.end(), two.begin(), two.end(), std::back_inserter(out));
 	printAll(out);
@@ -287,11 +287,11 @@ int main()
 	std::cout << "Use count aPtr1 = " << aPtr1.use_count() << std::endl;
 	std::shared_ptr<int> aPtr2{ aPtr1 };
 	std::cout << "Use count aPtr1 = " << aPtr1.use_count() << std::endl;
-	std::shared_ptr<int> bPtr1{static_cast<int*>(0)};
+	std::shared_ptr<int> bPtr1{ static_cast<int*>(0) };
 	std::cout << "Use count bPtr1 = " << bPtr1.use_count() << std::endl;
 	std::shared_ptr<int> bPtr2{ bPtr1 };
 	std::cout << "Use count bPtr1 = " << bPtr1.use_count() << std::endl;
-	std::shared_ptr<int> cPtr1{nullptr};
+	std::shared_ptr<int> cPtr1{ nullptr };
 	std::cout << "Use count cPtr1 = " << cPtr1.use_count() << std::endl;
 	std::shared_ptr<int> cPtr2{ cPtr1 };
 	std::cout << "Use count cPtr1 = " << cPtr1.use_count() << std::endl;
@@ -319,7 +319,7 @@ int main()
 
 	//findSchedules(56, 8, "???8???");
 	findSchedules(24, 4, "08??840");
-	const char bla[] = {"Val"};
+	const char bla[] = { "Val" };
 	auto change = coinChange(std::vector<int>{ 25, 10, 5 }, 30);
 	std::vector<int> testNumber{ 9, 9, 9 };
 	addOneToVector(testNumber);
@@ -338,8 +338,9 @@ int main()
 	auto client = std::thread{ Rep_Client{} };
 	server.detach();
 	client.join();
-
-	ThreadPool<int()> pool{};
+	{
+		ThreadPool<int()> pool{};
+	}
 
 	system("PAUSE");
 	return 0;
