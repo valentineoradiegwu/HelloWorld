@@ -59,7 +59,7 @@ void ThreadSafeQueue<T>::pop(T& item)
 {
 	std::unique_lock<std::mutex> lock{ m_mutex };
 	m_cond.wait(lock, [this] {return !this->m_queue.empty(); });
-	item = m_queue.front();
+	item = std::move(m_queue.front());
 	m_queue.pop();
 }
 

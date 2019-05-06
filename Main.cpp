@@ -22,6 +22,7 @@
 #include "ThreadSafeQueue.h"
 #include "rep_client.h"
 #include "rep_server.h"
+#include "ThreadPool.h"
 
 void hello()
 {
@@ -337,6 +338,8 @@ int main()
 	auto client = std::thread{ Rep_Client{} };
 	server.detach();
 	client.join();
+
+	ThreadPool<int()> pool{};
 
 	system("PAUSE");
 	return 0;

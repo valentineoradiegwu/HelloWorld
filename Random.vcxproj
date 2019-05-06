@@ -151,6 +151,7 @@
     <ClInclude Include="rep_server.h" />
     <ClInclude Include="SetOfStacks.h" />
     <ClInclude Include="Singleton.h" />
+    <ClInclude Include="ThreadPool.h" />
     <ClInclude Include="ThreadSafeList.h" />
     <ClInclude Include="ThreadSafeQueue.h" />
     <ClInclude Include="zmq.hpp" />
