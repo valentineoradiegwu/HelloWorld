@@ -58,8 +58,7 @@ ThreadPool<TaskType>::ThreadPool()
 	m_threads{},
 	m_shutdown{ false }
 {
-	auto hardware_threads = ThreadPool<TaskType>::GetHardwareThreads();
-	launch_threads(hardware_threads);
+	launch_threads(ThreadPool<TaskType>::GetHardwareThreads());
 }
 
 template <typename TaskType>
@@ -70,8 +69,7 @@ ThreadPool<TaskType>::ThreadPool(size_t threads)
 	m_threads{},
 	m_shutdown{ false }
 {
-	auto hardware_threads = std::min(ThreadPool<TaskType>::GetHardwareThreads(), threads);
-	launch_threads(hardware_threads);
+	launch_threads(std::min(ThreadPool<TaskType>::GetHardwareThreads(), threads));
 }
 
 template <typename TaskType>

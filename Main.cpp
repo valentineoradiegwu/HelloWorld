@@ -339,7 +339,16 @@ int main()
 	server.detach();
 	client.join();
 	{
+		std::vector<std::future<int>> futures{};
 		ThreadPool<int()> pool{};
+		for (auto i : { 1, 3, 4, 7 })
+		{
+			std::packaged_task<int()> job{ std::bind(&Factorial, i) };
+			futures.push_back(job.get_future());
+			pool.push(job);
+		}
+		for (auto& future : futures)
+			std::cout << "Factorial = " << future.get() << std::endl;
 	}
 
 	system("PAUSE");
