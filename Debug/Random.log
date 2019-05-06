@@ -4,30 +4,26 @@ c:\users\valentine oradiegwu\documents\visual studio 2015\projects\random\random
 c:\users\valentine oradiegwu\documents\visual studio 2015\projects\random\random\functions.cpp(39): warning C4018: '<': signed/unsigned mismatch
 c:\users\valentine oradiegwu\documents\visual studio 2015\projects\random\random\functions.cpp(133): warning C4018: '<': signed/unsigned mismatch
 c:\users\valentine oradiegwu\documents\visual studio 2015\projects\random\random\functions.cpp(156): warning C4018: '<': signed/unsigned mismatch
-c:\users\valentine oradiegwu\documents\visual studio 2015\projects\random\random\functions.cpp(196): warning C4018: '<': signed/unsigned mismatch
-c:\users\valentine oradiegwu\documents\visual studio 2015\projects\random\random\functions.cpp(262): warning C4018: '<': signed/unsigned mismatch
-c:\users\valentine oradiegwu\documents\visual studio 2015\projects\random\random\functions.cpp(283): warning C4018: '<': signed/unsigned mismatch
-c:\users\valentine oradiegwu\documents\visual studio 2015\projects\random\random\functions.cpp(292): warning C4018: '<': signed/unsigned mismatch
-c:\users\valentine oradiegwu\documents\visual studio 2015\projects\random\random\functions.cpp(301): warning C4018: '<': signed/unsigned mismatch
-c:\users\valentine oradiegwu\documents\visual studio 2015\projects\random\random\functions.cpp(303): warning C4018: '<': signed/unsigned mismatch
-c:\users\valentine oradiegwu\documents\visual studio 2015\projects\random\random\functions.cpp(327): warning C4018: '<': signed/unsigned mismatch
-c:\users\valentine oradiegwu\documents\visual studio 2015\projects\random\random\functions.cpp(355): warning C4018: '<': signed/unsigned mismatch
-c:\users\valentine oradiegwu\documents\visual studio 2015\projects\random\random\functions.cpp(421): warning C4018: '<': signed/unsigned mismatch
-c:\users\valentine oradiegwu\documents\visual studio 2015\projects\random\random\functions.cpp(675): warning C4018: '<': signed/unsigned mismatch
-c:\users\valentine oradiegwu\documents\visual studio 2015\projects\random\random\functions.cpp(716): warning C4018: '<': signed/unsigned mismatch
-c:\users\valentine oradiegwu\documents\visual studio 2015\projects\random\random\functions.cpp(782): warning C4018: '<': signed/unsigned mismatch
-c:\users\valentine oradiegwu\documents\visual studio 2015\projects\random\random\functions.cpp(788): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-c:\users\valentine oradiegwu\documents\visual studio 2015\projects\random\random\functions.cpp(793): warning C4018: '<': signed/unsigned mismatch
-c:\users\valentine oradiegwu\documents\visual studio 2015\projects\random\random\functions.cpp(812): warning C4018: '<': signed/unsigned mismatch
-c:\users\valentine oradiegwu\documents\visual studio 2015\projects\random\random\functions.cpp(829): warning C4018: '<': signed/unsigned mismatch
-c:\users\valentine oradiegwu\documents\visual studio 2015\projects\random\random\functions.cpp(1166): warning C4018: '<': signed/unsigned mismatch
-c:\users\valentine oradiegwu\documents\visual studio 2015\projects\random\random\functions.cpp(1323): warning C4018: '<': signed/unsigned mismatch
-c:\users\valentine oradiegwu\documents\visual studio 2015\projects\random\random\functions.cpp(1363): warning C4018: '<': signed/unsigned mismatch
-  Generating Code...
+c:\users\valentine oradiegwu\documents\visual studio 2015\projects\random\random\functions.cpp(229): warning C4018: '<': signed/unsigned mismatch
+c:\users\valentine oradiegwu\documents\visual studio 2015\projects\random\random\functions.cpp(295): warning C4018: '<': signed/unsigned mismatch
+c:\users\valentine oradiegwu\documents\visual studio 2015\projects\random\random\functions.cpp(316): warning C4018: '<': signed/unsigned mismatch
+c:\users\valentine oradiegwu\documents\visual studio 2015\projects\random\random\functions.cpp(325): warning C4018: '<': signed/unsigned mismatch
+c:\users\valentine oradiegwu\documents\visual studio 2015\projects\random\random\functions.cpp(334): warning C4018: '<': signed/unsigned mismatch
+c:\users\valentine oradiegwu\documents\visual studio 2015\projects\random\random\functions.cpp(336): warning C4018: '<': signed/unsigned mismatch
+c:\users\valentine oradiegwu\documents\visual studio 2015\projects\random\random\functions.cpp(360): warning C4018: '<': signed/unsigned mismatch
+c:\users\valentine oradiegwu\documents\visual studio 2015\projects\random\random\functions.cpp(388): warning C4018: '<': signed/unsigned mismatch
+c:\users\valentine oradiegwu\documents\visual studio 2015\projects\random\random\functions.cpp(454): warning C4018: '<': signed/unsigned mismatch
+c:\users\valentine oradiegwu\documents\visual studio 2015\projects\random\random\functions.cpp(708): warning C4018: '<': signed/unsigned mismatch
+c:\users\valentine oradiegwu\documents\visual studio 2015\projects\random\random\functions.cpp(749): warning C4018: '<': signed/unsigned mismatch
+c:\users\valentine oradiegwu\documents\visual studio 2015\projects\random\random\functions.cpp(815): warning C4018: '<': signed/unsigned mismatch
+c:\users\valentine oradiegwu\documents\visual studio 2015\projects\random\random\functions.cpp(821): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+c:\users\valentine oradiegwu\documents\visual studio 2015\projects\random\random\functions.cpp(826): warning C4018: '<': signed/unsigned mismatch
+c:\users\valentine oradiegwu\documents\visual studio 2015\projects\random\random\functions.cpp(845): warning C4018: '<': signed/unsigned mismatch
+c:\users\valentine oradiegwu\documents\visual studio 2015\projects\random\random\functions.cpp(862): warning C4018: '<': signed/unsigned mismatch
+c:\users\valentine oradiegwu\documents\visual studio 2015\projects\random\random\functions.cpp(1199): warning C4018: '<': signed/unsigned mismatch
+c:\users\valentine oradiegwu\documents\visual studio 2015\projects\random\random\functions.cpp(1378): warning C4018: '<': signed/unsigned mismatch
+c:\users\valentine oradiegwu\documents\visual studio 2015\projects\random\random\functions.cpp(1418): warning C4018: '<': signed/unsigned mismatch
 c:\users\valentine oradiegwu\documents\visual studio 2015\projects\random\random\functions.cpp(182): warning C4715: 'firstRepeatingInteger': not all control paths return a value
-  Compiling...
-  Main.cpp
-  Generating Code...
   Random.vcxproj -> C:\Users\Valentine Oradiegwu\documents\visual studio 2015\Projects\Random\Debug\Random.exe
   Random.vcxproj -> C:\Users\Valentine Oradiegwu\documents\visual studio 2015\Projects\Random\Debug\Random.pdb (Partial PDB)
           1 file(s) copied.

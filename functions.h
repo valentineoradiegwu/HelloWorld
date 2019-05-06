@@ -8,6 +8,12 @@
 #include <functional>
 #include <numeric>
 
+struct ListNode
+{
+	int data;
+	ListNode* next;
+};
+
 std::vector<int> LeetTwoSum(const std::vector<int>& numbers, int target);
 std::vector<int> LeetTwoSum2(const std::vector<int>& numbers, int target);
 std::vector<int> LeetTwoSumSorted(const std::vector<int>& numbers, int target);
@@ -64,6 +70,9 @@ std::vector<std::pair<int, int>> mergeInterval(std::vector<std::pair<int, int>>&
 std::vector<std::pair<int, int>> insertAndMergeInterval(std::vector<std::pair<int, int>>& intervals, std::pair<int, int> newInterval);
 std::vector<std::pair<int, int>> insertAndMergeInterval2(std::vector<std::pair<int, int>>& intervals, std::pair<int, int> newInterval);
 int repeatedNumberModify(std::vector<int>& input);
+int findSingleNumber(const std::vector<int>& input);
+void deleteNode(ListNode *node);
+int countSubsequences(const std::string& input);
 /*
 You are designing a compiler for a C++ program and need to check that braces in any file are balanced.
 Braces in a string are considered balanced if the following criteria are met.

@@ -182,6 +182,39 @@ int firstRepeatingInteger(const std::vector<int>& input)
 }
 
 /*
+You are given a pointer/reference to a node to be deleted in a linked list of size N. The task is to delete the node.  Pointer/reference to head node is not given.
+You may assume that the node to be deleted is not the last node.
+*/
+void deleteNode(ListNode *node)
+{
+	ListNode* next = node->next;
+	node->data = next->data;
+	node->next = next->next;
+	delete next;
+}
+
+/*
+Number of subsequences of the form a^i b^j c^k
+Given a string, count number of subsequences of the form aibjck, i.e., it consists of i ’a’ characters, followed by j ’b’ characters, followed by k ’c’ characters where i >= 1, j >=1 and k >= 1.
+Note: Two subsequences are considered different if the set of array indexes picked for the 2 subsequences are different.
+Expected Time Complexity : O(n)
+*/
+int countSubsequences(const std::string& input)
+{
+	int acount = 0, bcount = 0, ccount = 0;
+	for (auto eachchar : input)
+	{
+		if (eachchar == 'a')
+			acount = 1 + (2 * acount);
+		if (eachchar == 'b')
+			bcount = acount + (2 * bcount);
+		if (eachchar == 'c')
+			ccount = bcount + (2 * ccount);
+	}
+	return ccount;
+}
+
+/*
 1. To rotate an array by an offset, you want to start from the offset and wrap around
 2. You probably want to add an optimization. If the offset to rotate by a multiple of the size,
    just bail out.
@@ -1171,6 +1204,7 @@ int missing_integer(std::vector<int> input)
 	return -1;
 }
 
+//Runs in linear time
 int fib(int n)
 {
 	if (n <= 2)
@@ -1188,11 +1222,36 @@ int fib(int n)
 	return curr;
 }
 
+//Runs in exponential time
 int fibr(int n)
 {
 	if (n <= 2)
 		return 1;
 	return fibr(n - 1) + fibr(n - 2);
+}
+
+//Contrived example showing what Dynamic Programming is all about
+//cache previously computed solutions to subproblems to use when encountered again
+int fibDP(int n)
+{
+	if (n <= 2)
+		return 1;
+
+	std::unordered_map<int, int> memo{};
+	int res = 0;
+	for (int i = 1; i <= n; ++i)
+	{
+		if (i <= 2)
+		{
+			memo[i] = 1;
+		}
+		else
+		{
+			res = memo[i - 1] + memo[i - 2];
+			memo[i] = res;
+		}
+	}
+	return res;
 }
 
 int squareRoot(int input)
@@ -1426,6 +1485,18 @@ int repeatedNumberModify(std::vector<int>& input)
 		}
 	}
 	return -1;
+}
+
+/*
+1. A number XORed by itself is 0
+2. Any number XORed by 0 yields the number
+*/
+int findSingleNumber(const std::vector<int>& input)
+{
+	int res = 0;
+	for (int i : input)
+		res ^= i;
+	return res;
 }
 
 template <typename T>

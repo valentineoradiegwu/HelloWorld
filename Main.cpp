@@ -331,6 +331,7 @@ int main()
 	//insertAndMergeInterval(std::vector<std::pair<int, int>>{ {4, 5}, { 6, 9 } }, { 2, 3 });
 	insertAndMergeInterval2(std::vector<std::pair<int, int>>{ {4, 5}, { 6, 15 } }, { 10, 13 });
 	repeatedNumberModify(std::vector<int>{ 3, 4, 1, 4, 1});
+	findSingleNumber(std::vector<int>{ 7, 3, 5, 4, 5, 3, 4 });
 
 	auto server = std::thread{ Rep_Server{} };
 	auto client = std::thread{ Rep_Client{} };
