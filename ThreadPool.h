@@ -19,6 +19,7 @@ public:
 	ThreadPool& operator=(const ThreadPool&) = delete;
 	void push(std::packaged_task<TaskType>& job);
 	bool pop(std::packaged_task<TaskType>& job);
+	void shutdown();
 	~ThreadPool();
 private:
 	std::queue<std::packaged_task<TaskType>> m_queue;
@@ -28,7 +29,6 @@ private:
 	std::atomic<bool> m_shutdown;
 	void execute_task();
 	void launch_threads(int threads);
-	void shutdown();
 	static int GetHardwareThreads();
 };
 
@@ -54,8 +54,11 @@ void ThreadPool<TaskType>::launch_threads(int threads)
 template <typename TaskType>
 void ThreadPool<TaskType>::shutdown()
 {
-	m_shutdown = true;
-	m_cond.notify_all();
+	if (!m_shutdown)
+	{
+		m_shutdown = true;
+		m_cond.notify_all();
+	}
 }
 
 template <typename TaskType>
