@@ -28,6 +28,7 @@ private:
 	std::atomic<bool> m_shutdown;
 	void execute_task();
 	void launch_threads(int threads);
+	void shutdown();
 	static int GetHardwareThreads();
 };
 
@@ -48,6 +49,13 @@ void ThreadPool<TaskType>::launch_threads(int threads)
 		std::cout << "Launching Thread " << thread.get_id() << std::endl;
 		m_threads.push_back(std::move(thread));
 	}
+}
+
+template <typename TaskType>
+void ThreadPool<TaskType>::shutdown()
+{
+	m_shutdown = true;
+	m_cond.notify_all();
 }
 
 template <typename TaskType>
@@ -114,8 +122,7 @@ void ThreadPool<TaskType>::execute_task()
 template <typename TaskType>
 ThreadPool<TaskType>::~ThreadPool()
 {
-	m_shutdown = true;
-	m_cond.notify_all();
+	shutdown();
 	for (auto& thread : m_threads)
 		thread.join();
 }
