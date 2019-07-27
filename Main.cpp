@@ -23,6 +23,9 @@
 #include "rep_client.h"
 #include "rep_server.h"
 #include "ThreadPool.h"
+#include "HierarchicalObject.h"
+#include "my_mem_fn.h"
+#include "vending_machine.h"
 
 void hello()
 {
@@ -333,6 +336,20 @@ int main()
 	insertAndMergeInterval2(std::vector<std::pair<int, int>>{ {4, 5}, { 6, 15 } }, { 10, 13 });
 	repeatedNumberModify(std::vector<int>{ 3, 4, 1, 4, 1});
 	findSingleNumber(std::vector<int>{ 7, 3, 5, 4, 5, 3, 4 });
+
+	HierarchicalObject granddad{ nullptr, {"Mbadike", "Oradiegwu"} };
+	HierarchicalObject dad{ &granddad,{ "Nwabike", "Oradiegwu" } };
+	HierarchicalObject son{ &dad,{ "Obiajulu", "Oradiegwu" } };
+	son.merge_names();
+	son.print();
+
+	auto len = my_mem_fn(&std::string::size);
+	//auto len = std::mem_fn(&std::string::size);
+	std::cout << len(std::string{ "Val" }) << '\n';
+	//auto some_string{"Val"};
+	//std::cout << len(&some_string) << '\n';
+	VendingMachine vm{};
+	vm.Start();
 
 	auto server = std::thread{ Rep_Server{} };
 	auto client = std::thread{ Rep_Client{} };

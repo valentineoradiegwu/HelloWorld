@@ -21,6 +21,7 @@ std::vector<std::pair<int, int>> twoSumSortedAllMatches(const std::vector<int>& 
 int LeetReverseInt(int input);
 int LeetAtoi(const std::string& input);
 bool LeetIsPalindrome(int x);
+bool LeetIsPalindrome(const std::string& in);
 int LeetLongestSubstring(const std::string& s);
 std::vector<std::vector<int> > LeetThreeSum(std::vector<int>& nums);
 int LeetsubarraySum(std::vector<int>& nums, int k);

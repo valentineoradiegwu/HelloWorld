@@ -120,6 +120,20 @@ bool LeetIsPalindrome(int x)
 	return x == reversed;
 }
 
+bool LeetIsPalindrome(const std::string& in)
+{
+	auto start = in.begin();
+	auto end = in.end() - 1;
+	while (start < end)
+	{
+		if (*start != *end)
+			return false;
+		++start;
+		--end;
+	}
+	return true;
+}
+
 int LeetLongestSubstring(const std::string& s)
 {
 	int i = 0;
