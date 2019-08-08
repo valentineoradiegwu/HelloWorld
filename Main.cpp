@@ -26,6 +26,7 @@
 #include "HierarchicalObject.h"
 #include "my_mem_fn.h"
 #include "vending_machine.h"
+#include "type_erasure.h"
 
 void hello()
 {
@@ -367,6 +368,8 @@ int main()
 		for (auto& future : futures)
 			std::cout << "Factorial = " << future.get() << std::endl;
 	}
+	Any_Callable<int(int)> any_callable{ &Factorial };
+	std::cout << "Factorial on my callable = " << any_callable(7) << std::endl;
 
 	system("PAUSE");
 	return 0;
