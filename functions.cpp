@@ -1604,10 +1604,10 @@ std::string applyBackspaces(const std::string& input)
 
 	for (auto eachChar : input)
 	{
-		auto is_back_space = false;
 		if (eachChar == ',') continue;
 		if (eachChar == '-') continue;
 
+		auto is_back_space = false;
 		if (eachChar == 'B')
 		{
 			is_back_space = true;
