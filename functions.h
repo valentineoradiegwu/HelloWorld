@@ -5,6 +5,7 @@
 #include <iterator>
 #include <stack>
 #include <map>
+#include <vector>
 #include <functional>
 #include <numeric>
 
@@ -13,6 +14,17 @@ struct ListNode
 	int data;
 	ListNode* next;
 };
+
+struct QueueItem
+{
+	int value;
+	int list_idx;
+	int item_idx;
+};
+
+bool operator<(const QueueItem& lhs, const QueueItem& rhs);
+
+std::vector<int> mergeKLists(const std::vector<std::vector<int>>& lists);
 
 std::vector<int> LeetTwoSum(const std::vector<int>& numbers, int target);
 std::vector<int> LeetTwoSum2(const std::vector<int>& numbers, int target);
@@ -74,6 +86,11 @@ int repeatedNumberModify(std::vector<int>& input);
 int findSingleNumber(const std::vector<int>& input);
 void deleteNode(ListNode *node);
 int countSubsequences(const std::string& input);
+void partition(std::vector<int>& array);
+int LongestIncreasingSubsequence(const std::vector<int>& input);
+bool checkEquivalentKeypresses(const std::string& one, const std::string& two);
+//If u see a proper char, put on the top of stack. Once u see a backspace, pop from the stack. The stack is just a std::string
+std::string applyBackspaces(const std::string& input);
 /*
 You are designing a compiler for a C++ program and need to check that braces in any file are balanced.
 Braces in a string are considered balanced if the following criteria are met.

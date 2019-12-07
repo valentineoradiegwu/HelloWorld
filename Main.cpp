@@ -370,6 +370,9 @@ int main()
 	}
 	Any_Callable<int(int)> any_callable{ &Factorial };
 	std::cout << "Factorial on my callable = " << any_callable(7) << std::endl;
+	std::cout << "Equivalent = " << checkEquivalentKeypresses("a,b,c,c,-B,d", "a,b,c,d") << std::endl;
+	std::cout << "Equivalent = " << checkEquivalentKeypresses("-B,-B,-B,c,c", "c,c") << std::endl;
+	std::cout << "Equivalent = " << checkEquivalentKeypresses("", "a,-B,-B,a,-B,a,b,c,c,c,d") << std::endl;
 
 	system("PAUSE");
 	return 0;

@@ -1,5 +1,6 @@
 #include "functions.h"
 #include <map>
+#include <queue>
 #include <unordered_map>
 #include <unordered_set>
 #include <set>
@@ -1119,6 +1120,40 @@ std::string MergeStrings(const std::vector<std::string>& iInput)
 	return result;
 }
 
+bool operator<(const QueueItem & lhs, const QueueItem & rhs)
+{
+	return lhs.value < rhs.value;
+}
+
+std::vector<int> mergeKLists(const std::vector<std::vector<int>>& lists)
+{
+	std::priority_queue<QueueItem> queue{};
+	int total = 0;
+	for (int i = 0; i < lists.size(); ++i)
+	{
+		QueueItem item{ lists[i][0], i, 0 };
+		queue.push(item);
+		total += lists[i].size();
+	}
+
+	std::vector<int> results{};
+	results.reserve(total);
+
+	while (!queue.empty())
+	{
+		auto top = queue.top();
+		results.push_back(top.value);
+		queue.pop();
+		auto next = top.item_idx + 1;
+		if (next < lists[top.list_idx].size())
+		{
+			QueueItem item{ lists[top.list_idx][next], top.list_idx, next };
+			queue.push(item);
+		}
+	}
+	return results;
+}
+
 int myAtoi(std::string str) 
 {
 	int res = 0;
@@ -1510,6 +1545,81 @@ int findSingleNumber(const std::vector<int>& input)
 	int res = 0;
 	for (int i : input)
 		res ^= i;
+	return res;
+}
+
+void partition(std::vector<int>& array)
+{
+	auto pivot = array[array.size() - 1];
+	auto partition = 0;
+	for (int i = 0; i < array.size() - 1; ++i)
+	{
+		if (array[i] <= pivot)
+		{
+			std::swap(array[i], array[partition]);
+			++partition;
+		}
+	}
+	std::swap(array[partition], array[array.size() - 1]);
+}
+
+//https://www.youtube.com/watch?v=E6us4nmXTHs
+int LongestIncreasingSubsequence(const std::vector<int>& input)
+{
+	if (input.empty())
+		return 0;
+
+	std::vector<int> result(input.size(), 1);
+	for (int i = 1; i < input.size(); ++i)
+	{
+		int j = 0;
+		while (j < i)
+		{
+			if (input[j] < input[i])
+			{
+				result[i] = std::max(result[i], result[j] + 1);
+			}
+			++j;
+		}
+	}
+
+	int max = result[0];
+	for (auto i : result)
+	{
+		if (i > max)
+			max = i;
+	}
+	return max;
+}
+
+bool checkEquivalentKeypresses(const std::string& one, const std::string& two)
+{
+	return applyBackspaces(one) == applyBackspaces(two);
+}
+
+std::string applyBackspaces(const std::string& input)
+{
+	std::string res;
+	res.reserve(input.size());
+
+	for (auto eachChar : input)
+	{
+		auto is_back_space = false;
+		if (eachChar == ',') continue;
+		if (eachChar == '-') continue;
+
+		if (eachChar == 'B')
+		{
+			is_back_space = true;
+		}
+		if (!is_back_space)
+			res.push_back(eachChar);
+		else
+		{
+			if (!res.empty())
+				res.pop_back();
+		}
+	}
 	return res;
 }
 
