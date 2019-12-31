@@ -1048,6 +1048,40 @@ int BinSearchArray(int input[], int length, int key)
 	return -1;
 }
 
+
+int BinSearchArrayRecurseImpl(int input[], int low, int high, int key)
+{
+	if (high < low)
+		return -1;
+	auto mid = low + (high - low) / 2;
+
+	if (input[mid] == key)
+		return mid;
+	else if (input[mid] < key)
+		return BinSearchArrayRecurseImpl(input, mid + 1, high, key);
+	return BinSearchArrayRecurseImpl(input, low, mid - 1, key);
+}
+
+int BinSearchArrayRecurse(int input[], int length, int key)
+{
+	return BinSearchArrayRecurseImpl(input, 0, length - 1, key);
+}
+
+//Assume input is unbounded and infinite
+//Can be applied to infinite sorted streams
+int InterpolatedSearch(int input[], int key)
+{
+	auto low = 0;
+	auto high = 1;
+
+	while (input[high] < key)
+	{
+		low = high;
+		high = low * 2;
+	}
+	return BinSearchArrayRecurseImpl(input, low, high, key);
+}
+
 // 1. If we find a match at mid and the previous field is not equal to us, then we are the first occurence. Return index.
 // 2. If we find a match but the prev field is equal to us, then we treat as if the mid point is greater so we move high left.
 // 1, 2, 3, 3, 3, 3, 4
@@ -1068,6 +1102,25 @@ int binSearchFirstOccurence(const std::vector<int>& input, int key)
 	return -1;
 }
 
+int binSearchFirstOccurence2(const std::vector<int>& input, int key)
+{
+	int low = 0;
+	int high = input.size() - 1;
+	while (low <= high)
+	{
+		int mid = low + (high - low) / 2;
+		if (input[mid] > key)
+			high = mid - 1;
+		else if (input[mid] < key)
+			low = mid + 1;
+		else if (low != mid)
+			high = mid;
+		else
+			return low;
+	}
+	return - 1;
+}
+
 int BinFindFirstLargerThanK(const std::vector<int>& input, int key)
 {
 	int left = 0;
@@ -1081,6 +1134,23 @@ int BinFindFirstLargerThanK(const std::vector<int>& input, int key)
 			right = mid;
 	}
 	return left == input.size() ? -1 : left;
+}
+
+int IndexEqualToElement(const std::vector<int>& input)
+{
+	int low = 0;
+	int high = input.size() - 1;
+	while (low <= high)
+	{
+		int mid = low + (high - low) / 2;
+		if (input[mid] == mid)
+			return mid;
+		else if (input[mid] < mid)
+			low = mid + 1;
+		else
+			high = mid - 1;
+	}
+	return -1;
 }
 
 int UtopianTree(int cycles)

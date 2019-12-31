@@ -308,6 +308,7 @@ int main()
 	std::cout << "Is balanced = " << is_balanced_can_contain_nonbraces("ryriir{uri[fjjfk]rir}") << std::endl;
 	std::cout << "Is balanced = " << is_balanced_can_contain_nonbraces("jfkfkfkui") << std::endl;
 
+	std::cout << "Naive square root = " << squareRoot(4) << std::endl;
 	squareRoot2(17);
 	std::cout << "First Occurence in bin search = " << binSearchFirstOccurence(std::vector<int>{-5, 1, 1, 1, 1, 6, 8, 9}, 1) << std::endl;
 	std::cout << "First Occurence in bin search = " << binSearchFirstOccurence(std::vector<int>{-5, 1, 1, 1, 1, 6, 8, 9}, 10) << std::endl;

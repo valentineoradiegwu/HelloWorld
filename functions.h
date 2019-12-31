@@ -59,6 +59,8 @@ bool are_anagrams2(const std::string& one, const std::string& two);
 std::vector<std::vector<std::string>> Anagrams(const std::vector<std::string>& dictionary);
 std::string replaceSpaceWithEncoding(char* input);
 int BinSearchArray(int input[], int length, int key);
+int BinSearchArrayRecurse(int input[], int length, int key);
+int InterpolatedSearch(int input[], int key);
 std::pair<int, int> FindLargestIncreasingSubSequence(const std::vector<int>& input);
 bool is_substr(const char* input1, const char* input2);
 int UtopianTree(int cycles);
@@ -69,7 +71,9 @@ size_t CountBitsInInt(int input);
 int squareRoot(int input);
 int squareRoot2(int input);
 int binSearchFirstOccurence(const std::vector<int>& input, int key);
+int binSearchFirstOccurence2(const std::vector<int>& input, int key);
 int BinFindFirstLargerThanK(const std::vector<int>& input, int key);
+int IndexEqualToElement(const std::vector<int>& input);
 std::string multiplyStrings(const std::string& first, const std::string& second);
 std::map<int, int> coinChange(std::vector<int>& denominations, int amount);
 int FindMaxLengthValidParenthesis(const std::string& input);
@@ -422,4 +426,20 @@ OutIter intersectTwoSortedRanges(InIter begin1, InIter end1, InIter begin2, InIt
 		}
 	}
 	return start;
+}
+
+template <typename Iter>
+Iter remove(Iter begin, Iter end, const typename std::iterator_traits<Iter>::value_type& item)
+{
+	Iter result = begin;
+	while (begin != end)
+	{
+		if (*result != item)
+		{
+			*result = *begin;
+			++result;
+		}
+		++begin;
+	}
+	return result;
 }
